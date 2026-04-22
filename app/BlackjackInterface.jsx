@@ -1,6 +1,9 @@
+import PlayingCardHand from "./PlayingCardHand";
 
 
-export default function BlackjackInterface(){
+
+
+export default function BlackjackInterface() {
 
     const dealerCards = [
         {
@@ -20,7 +23,7 @@ export default function BlackjackInterface(){
             suit: "s",
             rank: 3,
             faceup: true
-        },{
+        }, {
             suit: "c",
             rank: 4,
             faceup: true
@@ -31,12 +34,14 @@ export default function BlackjackInterface(){
         <div className="uiCard">
             {/* Hit, stand, reset, money display, card display, remaining cards in deck, round counter */}
             <div>
-                dealer cards
+                <h1>Dealer</h1>{/*make this bold*/}
+                <PlayingCardHand cards={dealerCards} />
             </div>
 
-            <div style={{display: "flex"}}>
+            <div>
                 <div>
-                    player cards
+                    <h1>Player</h1>{/*make this bold*/}
+                    <PlayingCardHand cards={playerCards} />
                 </div>
                 <div>
                     buttons

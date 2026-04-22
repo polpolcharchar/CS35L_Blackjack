@@ -45,7 +45,7 @@ body {
   border-radius: 10px;
   border-width: 1px;
 
-  width: fit-content;
+  /* width: fit-content; */
 
   padding: 10px;
   margin: 10px;

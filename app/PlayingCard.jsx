@@ -12,7 +12,7 @@ export default function PlayingCard({suit, rank, faceup}){
     return (
         <div className="playingCard" style={{color: (suit === "h" || suit === "d" ? "red" : "black")}}>
             {
-                faceup === "true" && <p>{rank} of {suitMap[suit]}</p>
+                faceup === true && <p>{rank} of {suitMap[suit]}</p>
             }
         </div>
     )
