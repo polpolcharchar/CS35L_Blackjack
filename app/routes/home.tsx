@@ -1,4 +1,6 @@
 import type { Route } from "./+types/home";
+import PlayingCard from "../PlayingCard.jsx";
+import BlackjackInterface from "../BlackjackInterface.jsx";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -8,5 +10,12 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <p>Starter home page</p>;
+  return (
+  
+  <>
+  
+  <PlayingCard rank="1" suit="h" faceup="true"/>
+  <BlackjackInterface/>
+  </>
+  );
 }
