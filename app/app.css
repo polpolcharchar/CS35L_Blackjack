@@ -51,3 +51,19 @@ body {
   margin: 10px;
 }
 
+.uiButton{
+  background-color: #009dff;
+  border-style: solid;
+  border-radius: 50%;
+  border-width: 5px;
+  padding: 20px;
+
+  width: 100px;
+  height: 100px;
+
+  justify-content: center;
+}
+
+.marginLeft{
+  margin-left: 40%;
+}

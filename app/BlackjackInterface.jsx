@@ -30,6 +30,10 @@ export default function BlackjackInterface() {
         },
     ]
 
+    function handleClick( type ) {
+        
+    }
+
     return (
         <div className="uiCard">
             {/* Hit, stand, reset, money display, card display, remaining cards in deck, round counter */}
@@ -44,7 +48,9 @@ export default function BlackjackInterface() {
                     <PlayingCardHand cards={playerCards} />
                 </div>
                 <div>
-                    buttons
+                    <button className="uiButton marginLeft" onClick={() => handleClick("Hit")}>Hit</button>
+                    <button className="uiButton" onClick={() => handleClick("Stand")}>Stand</button>
+                    <button className="uiButton" onClick={() => handleClick("Reset")}>Reset</button>
                 </div>
             </div>
         </div>
