@@ -4,7 +4,8 @@ import { useState } from "react";
 
 
 export default function BlackjackInterface() {
-
+    
+    const [handWinner, setHandWinner] = useState("None")
     const [dealerCards, setDealerCards] = useState([])
     const dealerCardsT = [
         {
@@ -60,6 +61,43 @@ export default function BlackjackInterface() {
             if (total + 10 <= 21) total += 10
         }
         return total
+    }
+
+    function checkGameState(caller) {
+        const playerTotal = getHandValue(playerCards)
+        const dealerTotal = getHandValue(dealeCards)
+        if (playerTotal > 21)
+        {
+            setHandWinner("Dealer")
+        }
+        else if (dealerTotal > 21)
+        {
+            setHandWinner("Player")
+        }
+        else if (caller == "Stand")
+        {
+            const test = dealerTotal
+            while(dealerTotal < 17)
+            {
+                const suits = ["s", "c", "d", "h"]
+                const newSuit = suits[Math.floor(Math.random() * suits.length)]
+                const newRank = Math.floor((Math.random() * 10)) + 1
+                const newCard = { suit: newSuit, rank: newRank, faceup: true }
+                setDealerCards(dealerCards.concat(newCard))
+                dealerTotal = getHandValue(dealerCards)
+            }
+            if (dealerTotal > 21 || playerTotal > dealerTotal)
+            {
+                setHandWinner("Player")
+            }
+            else if (dealerTotal > playerTotal)
+            {
+                setHandWinner("Dealer")
+            }
+            else{
+                setHandWinner("Draw")
+            }
+        }
     }
 
     return (
