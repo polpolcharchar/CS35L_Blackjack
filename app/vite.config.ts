@@ -7,4 +7,12 @@ export default defineConfig({
   resolve: {
     tsconfigPaths: true,
   },
+  server: {
+    host: true,
+    port: 5173,
+    strictPort: false,
+    proxy: {
+      "/api": "http://localhost:5000"
+    }
+  },
 });
