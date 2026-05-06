@@ -64,6 +64,7 @@ export default function BlackjackGame() {
         }
         else if (type == "Stand") {
             //Do later
+            checkGameState("Stand");
         }
         else if (type == "Reset") {
             setPlayerCards(playerCardsT)
@@ -81,8 +82,10 @@ export default function BlackjackGame() {
     }
 
     function checkGameState(caller) {
+        console.log("checking state");
         const playerTotal = getHandValue(playerCards)
-        const dealerTotal = getHandValue(dealeCards)
+        let dealerCardsLocal = dealerCards.slice();
+        let dealerTotal = getHandValue(dealerCardsLocal);
         if (playerTotal > 21) {
             setHandWinner("Dealer")
         }
@@ -91,14 +94,21 @@ export default function BlackjackGame() {
         }
         else if (caller == "Stand") {
             const test = dealerTotal
-            while (dealerTotal < 17) {
-                const suits = ["s", "c", "d", "h"]
+
+            let temp = 0;
+            while (dealerTotal < 17 && temp < 10) {
+                temp++;
                 const newSuit = suits[Math.floor(Math.random() * suits.length)]
                 const newRank = Math.floor((Math.random() * 10)) + 1
                 const newCard = { suit: newSuit, rank: newRank, faceup: true }
-                setDealerCards(dealerCards.concat(newCard))
-                dealerTotal = getHandValue(dealerCards)
+                dealerCardsLocal = dealerCardsLocal.concat(newCard);
+
+                // THIS CANNOT BE DONE BECAUSE DEALERCARDS IS NOT GUARENTEED TO BE UPDATED IMMEDIATELY!
+                // dealerTotal = getHandValue(dealerCards)
+
+                dealerTotal = getHandValue(dealerCardsLocal);
             }
+            setDealerCards(dealerCardsLocal);
             if (dealerTotal > 21 || playerTotal > dealerTotal) {
                 setHandWinner("Player")
             }
@@ -113,7 +123,7 @@ export default function BlackjackGame() {
 
     return (
         <>
-        <BlackjackInterface handleClick={handleClick} dealerCards={dealerCards} playerCards={playerCards}/>
+            <BlackjackInterface handleClick={handleClick} dealerCards={dealerCards} playerCards={playerCards} />
         </>
     )
 }

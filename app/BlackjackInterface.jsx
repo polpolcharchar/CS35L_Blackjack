@@ -6,7 +6,8 @@ import { useState } from "react";
 export default function BlackjackInterface({
     handleClick,
     dealerCards,
-    playerCards
+    playerCards,
+    handWinner,
 }) {
     
     return (
@@ -27,6 +28,11 @@ export default function BlackjackInterface({
                     <button className="uiButton" onClick={() => handleClick("Stand")}>Stand</button>
                     <button className="uiButton" onClick={() => handleClick("Reset")}>Reset</button>
                 </div>
+            </div>
+
+            <div>{handWinner && (
+                    <h1>{handWinner} has won!</h1>
+                )}
             </div>
         </div>
     )
