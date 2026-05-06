@@ -1,74 +1,70 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BlackjackInterface from "./BlackjackInterface";
 
 
 
 const suits = ["h", "d", "c", "s"];
 class PlayingCardObject {
-    constructor(suit, rank) {
+    constructor(suit, rank, faceup) {
         this.suit = suit;
         this.rank = rank;
+        this.faceup = faceup;
     }
 
 }
 
 export default function BlackjackGame() {
 
-    // const [deck, setDeck] = useState([]);
+    //Found Online - Helper function
+    const shuffle = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
 
-    // const resetDeck = () => {
-    //     result = []
-    //     for (let i = 0; i < 11; i++) {
-    //         for (s in suits) {
-    //             result.push(new PlayingCardObject(s, i));
-    //         }
-    //     }
-    //     setDeck(result);
-    // }
+    const [deck, setDeck] = useState([]);
+    const resetDeck = () => {
+        let result = []
+        for (let i = 1; i <= 13; i++) {
+            for (const s of suits) {
+                result.push(new PlayingCardObject(s, i, true));
+            }
+        }
+        shuffle(result);
+        setDeck(result);
+    }
 
-    const [handWinner, setHandWinner] = useState("None")
-    const [dealerCards, setDealerCards] = useState([])
-    const dealerCardsT = [
-        {
-            suit: "h",
-            rank: 2,
-            faceup: true
-        },
-        {
-            suit: "d",
-            rank: 3,
-            faceup: false
-        },
-    ]
+    //resets the deck on startup
+    useEffect(() => {
+        resetDeck();
+    }, []);
 
-    const [playerCards, setPlayerCards] = useState([])
-    const playerCardsT = [
-        {
-            suit: "s",
-            rank: 3,
-            faceup: true
-        }, {
-            suit: "c",
-            rank: 4,
-            faceup: true
-        },
-    ]
+    const pullCard = () => {
+        if(deck.length === 0)return;
+
+        let result = deck[0];
+        setDeck(prev => prev.slice(1));
+        return result;
+    }
+
+    const [handWinner, setHandWinner] = useState("");
+    const [dealerCards, setDealerCards] = useState([]);
+
+    const [playerCards, setPlayerCards] = useState([]);
 
     function handleClick(type) {
-        if (type == "Hit") {
-            const suits = ["s", "c", "d", "h"]
-            const newSuit = suits[Math.floor(Math.random() * suits.length)]
-            const newRank = Math.floor((Math.random() * 10)) + 1
-            const newCard = { suit: newSuit, rank: newRank, faceup: true }
-            setPlayerCards(playerCards.concat(newCard))
+        if (type == "Hit") {            
+            setPlayerCards(playerCards.concat(pullCard()));
         }
         else if (type == "Stand") {
-            //Do later
             checkGameState("Stand");
         }
         else if (type == "Reset") {
-            setPlayerCards(playerCardsT)
-            setDealerCards(dealerCardsT)
+            setPlayerCards([]);
+            setDealerCards([]);
+            resetDeck();
         }
     }
 
