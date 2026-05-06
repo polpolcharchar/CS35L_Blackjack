@@ -123,7 +123,7 @@ export default function BlackjackGame() {
 
     return (
         <>
-            <BlackjackInterface handleClick={handleClick} dealerCards={dealerCards} playerCards={playerCards} />
+            <BlackjackInterface handleClick={handleClick} dealerCards={dealerCards} playerCards={playerCards} handWinner={handWinner} />
         </>
     )
 }
