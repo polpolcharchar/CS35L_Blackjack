@@ -41,11 +41,11 @@ export default function BlackjackGame() {
         resetDeck();
     }, []);
 
-    const pullCard = () => {
+    const pullCard = (count = 1) => {
         if(deck.length === 0)return;
 
-        let result = deck[0];
-        setDeck(prev => prev.slice(1));
+        let result = deck.slice(0, count);
+        setDeck(prev => prev.slice(count));
         return result;
     }
 
@@ -54,17 +54,33 @@ export default function BlackjackGame() {
 
     const [playerCards, setPlayerCards] = useState([]);
 
+    const [clickableButtons, setClickableButtons] = useState(["Deal", "Reset"]);
     function handleClick(type) {
-        if (type == "Hit") {            
+        if (!clickableButtons.includes(type))
+        {
+            return;
+        }
+        if (type == "Deal") {
+            const cards = pullCard(4);
+            setPlayerCards(playerCards.concat(cards[0], cards[2]));
+            setDealerCards(dealerCards.concat(cards[1], cards[3]));
+            checkGameState("Deal");
+            setClickableButtons(["Hit", "Stand", "Reset"]);
+        }
+        else if (type == "Hit") {            
             setPlayerCards(playerCards.concat(pullCard()));
+            checkGameState("Hit");
+            setClickableButtons(["Hit", "Stand", "Reset"]);
         }
         else if (type == "Stand") {
             checkGameState("Stand");
+            setClickableButtons(["Deal", "Reset"]);
         }
         else if (type == "Reset") {
             setPlayerCards([]);
             setDealerCards([]);
             resetDeck();
+            setClickableButtons(["Deal", "Reset"]);
         }
     }
 
