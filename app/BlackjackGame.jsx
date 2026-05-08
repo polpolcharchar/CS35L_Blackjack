@@ -87,7 +87,9 @@ export default function BlackjackGame() {
     }
 
     function getHandValue(cards) {
-        let total = cards.reduce((sum, card) => sum + card.rank, 0)
+        let total = cards.reduce((sum, card) => {
+            const value = card.rank > 10 ? 10 : card.rank;
+            return sum + value}, 0)
         const aces = cards.filter(card => card.rank === 1)
         for (let i = 0; i < aces.length; i++) {
             if (total + 10 <= 21) total += 10
