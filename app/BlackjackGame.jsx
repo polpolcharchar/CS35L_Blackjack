@@ -81,6 +81,8 @@ export default function BlackjackGame() {
             setDealerCards([]);
             resetDeck();
             setClickableButtons(["Deal", "Reset"]);
+            setScore(0);
+            setHandWinner("");
         }
     }
 
@@ -100,9 +102,11 @@ export default function BlackjackGame() {
         let dealerTotal = getHandValue(dealerCardsLocal);
         if (playerTotal > 21) {
             setHandWinner("Dealer")
+            endRound(0)
         }
         else if (dealerTotal > 21) {
             setHandWinner("Player")
+            endRound(100)
         }
         else if (caller == "Stand") {
             const test = dealerTotal
@@ -123,19 +127,31 @@ export default function BlackjackGame() {
             setDealerCards(dealerCardsLocal);
             if (dealerTotal > 21 || playerTotal > dealerTotal) {
                 setHandWinner("Player")
+                endRound(100)
             }
             else if (dealerTotal > playerTotal) {
                 setHandWinner("Dealer")
+                endRound(0)
             }
             else {
                 setHandWinner("Draw")
+                endRound(50)
             }
         }
     }
 
+    const [score, setScore] = useState(0);
+    function endRound(score)
+    {
+        setPlayerCards([]);
+        setDealerCards([]);
+        setClickableButtons(["Deal", "Reset"]);
+        setScore(prev => prev + score);
+    }
+
     return (
         <>
-            <BlackjackInterface handleClick={handleClick} dealerCards={dealerCards} playerCards={playerCards} handWinner={handWinner} />
+            <BlackjackInterface handleClick={handleClick} dealerCards={dealerCards} playerCards={playerCards} handWinner={handWinner} playerScore={score} />
         </>
     )
 }

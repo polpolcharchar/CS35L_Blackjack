@@ -8,6 +8,7 @@ export default function BlackjackInterface({
     dealerCards,
     playerCards,
     handWinner,
+    playerScore,
 }) {
     
     return (
@@ -29,6 +30,10 @@ export default function BlackjackInterface({
                     <button className="uiButton" onClick={() => handleClick("Stand")}>Stand</button>
                     <button className="uiButton" onClick={() => handleClick("Reset")}>Reset</button>
                 </div>
+            </div>
+
+            <div>
+                <h1>Player Score: {playerScore}</h1>
             </div>
 
             <div>{handWinner && (
