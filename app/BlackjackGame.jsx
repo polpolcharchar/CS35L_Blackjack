@@ -42,7 +42,7 @@ export default function BlackjackGame() {
     }, []);
 
     const pullCard = (count = 1) => {
-        if(deck.length === 0)return;
+        if (deck.length === 0) return;
 
         let result = deck.slice(0, count);
         setDeck(prev => prev.slice(count));
@@ -56,8 +56,7 @@ export default function BlackjackGame() {
 
     const [clickableButtons, setClickableButtons] = useState(["Deal", "Reset"]);
     function handleClick(type) {
-        if (!clickableButtons.includes(type))
-        {
+        if (!clickableButtons.includes(type)) {
             return;
         }
         if (type == "Deal") {
@@ -67,7 +66,7 @@ export default function BlackjackGame() {
             setClickableButtons(["Hit", "Stand", "Reset"]);
             checkGameState("Deal");
         }
-        else if (type == "Hit") {            
+        else if (type == "Hit") {
             setPlayerCards(playerCards.concat(pullCard()));
             setClickableButtons(["Hit", "Stand", "Reset"]);
             checkGameState("Hit");
@@ -88,7 +87,8 @@ export default function BlackjackGame() {
     function getHandValue(cards) {
         let total = cards.reduce((sum, card) => {
             const value = card.rank > 10 ? 10 : card.rank;
-            return sum + value}, 0)
+            return sum + value
+        }, 0)
         const aces = cards.filter(card => card.rank === 1)
         for (let i = 0; i < aces.length; i++) {
             if (total + 10 <= 21) total += 10
@@ -96,10 +96,11 @@ export default function BlackjackGame() {
         return total
     }
 
-    function checkGameState(caller) {
-        console.log("checking state");
+    function checkGameState(caller, dealerHand = dealerCards) {
+        //dealerCards should be passed recursively because this function is recursive
+        //In a recursive function call, hook is never updated
         const playerTotal = getHandValue(playerCards)
-        let dealerCardsLocal = dealerCards.slice();
+        let dealerCardsLocal = dealerHand.slice();
         let dealerTotal = getHandValue(dealerCardsLocal);
         if (playerTotal > 21) {
             setHandWinner("Dealer")
@@ -112,43 +113,45 @@ export default function BlackjackGame() {
             setClickableButtons(["Deal"])
         }
         else if (caller == "Stand") {
-            const test = dealerTotal
 
-            let temp = 0;
-            while (dealerTotal < 17 && temp < 10) {
-                temp++;
-                const newSuit = suits[Math.floor(Math.random() * suits.length)]
-                const newRank = Math.floor((Math.random() * 10)) + 1
-                const newCard = { suit: newSuit, rank: newRank, faceup: true }
-                dealerCardsLocal = dealerCardsLocal.concat(newCard);
-
-                // THIS CANNOT BE DONE BECAUSE DEALERCARDS IS NOT GUARENTEED TO BE UPDATED IMMEDIATELY!
-                // dealerTotal = getHandValue(dealerCards)
-
-                dealerTotal = getHandValue(dealerCardsLocal);
+            if (dealerTotal >= 17 || dealerTotal > playerTotal) {
+                if (dealerTotal > 21 || playerTotal > dealerTotal) {
+                    setHandWinner("Player")
+                    endRound(100)
+                    setClickableButtons(["Deal"])
+                }
+                else if (dealerTotal > playerTotal) {
+                    setHandWinner("Dealer")
+                    endRound(0)
+                    setClickableButtons(["Deal"])
+                }
+                else {
+                    setHandWinner("Draw")
+                    endRound(50)
+                    setClickableButtons(["Deal"])
+                }
+                return;
             }
+
+            const newSuit = suits[Math.floor(Math.random() * suits.length)]
+            const newRank = Math.floor((Math.random() * 10)) + 1
+            const newCard = { suit: newSuit, rank: newRank, faceup: true }
+            dealerCardsLocal = dealerCardsLocal.concat(newCard);
+
+            // THIS CANNOT BE DONE BECAUSE DEALERCARDS IS NOT GUARENTEED TO BE UPDATED IMMEDIATELY!
+            // dealerTotal = getHandValue(dealerCards)
+
+            dealerTotal = getHandValue(dealerCardsLocal);
             setDealerCards(dealerCardsLocal);
-            if (dealerTotal > 21 || playerTotal > dealerTotal) {
-                setHandWinner("Player")
-                endRound(100)
-                setClickableButtons(["Deal"])
-            }
-            else if (dealerTotal > playerTotal) {
-                setHandWinner("Dealer")
-                endRound(0)
-                setClickableButtons(["Deal"])
-            }
-            else {
-                setHandWinner("Draw")
-                endRound(50)
-                setClickableButtons(["Deal"])
-            }
+
+            setTimeout(() => {
+                checkGameState("Stand", dealerCardsLocal);
+            }, 1000);
         }
     }
 
     const [score, setScore] = useState(0);
-    function endRound(score)
-    {
+    function endRound(score) {
         setPlayerCards([]);
         setDealerCards([]);
         setClickableButtons(["Deal", "Reset"]);
@@ -158,15 +161,15 @@ export default function BlackjackGame() {
     return (
         <>
             <BlackjackInterface
-            handleClick={handleClick}
-            dealerCards={dealerCards}
-            playerCards={playerCards}
-            handWinner={handWinner}
-            playerScore={score}
-            dealButtonDisabled={clickableButtons.findIndex(a => a == "Deal") == -1}
-            hitButtonDisabled={clickableButtons.findIndex(a => a == "Hit") == -1}
-            standButtonDisabled={clickableButtons.findIndex(a => a == "Stand") == -1}
-            resetButtonDisabled={clickableButtons.findIndex(a => a == "Reset") == -1}
+                handleClick={handleClick}
+                dealerCards={dealerCards}
+                playerCards={playerCards}
+                handWinner={handWinner}
+                playerScore={score}
+                dealButtonDisabled={clickableButtons.findIndex(a => a == "Deal") == -1}
+                hitButtonDisabled={clickableButtons.findIndex(a => a == "Hit") == -1}
+                standButtonDisabled={clickableButtons.findIndex(a => a == "Stand") == -1}
+                resetButtonDisabled={clickableButtons.findIndex(a => a == "Reset") == -1}
             />
         </>
     )
