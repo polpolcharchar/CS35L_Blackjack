@@ -87,13 +87,13 @@ export default function BlackjackGame() {
     function getHandValue(cards) {
         let total = cards.reduce((sum, card) => {
             const value = card.rank > 10 ? 10 : card.rank;
-            return sum + value
-        }, 0)
-        const aces = cards.filter(card => card.rank === 1)
+            return sum + value;
+        }, 0);
+        const aces = cards.filter(card => card.rank === 1);
         for (let i = 0; i < aces.length; i++) {
-            if (total + 10 <= 21) total += 10
+            if (total + 10 <= 21) total += 10;
         }
-        return total
+        return total;
     }
 
     function checkGameState(caller, dealerHand = dealerCards) {
@@ -103,39 +103,39 @@ export default function BlackjackGame() {
         let dealerCardsLocal = dealerHand.slice();
         let dealerTotal = getHandValue(dealerCardsLocal);
         if (playerTotal > 21) {
-            setHandWinner("Dealer")
-            endRound(0)
-            setClickableButtons(["Deal"])
+            setHandWinner("Dealer");
+            endRound(0);
+            setClickableButtons(["Deal"]);
         }
         else if (dealerTotal > 21) {
-            setHandWinner("Player")
-            endRound(100)
-            setClickableButtons(["Deal"])
+            setHandWinner("Player");
+            endRound(100);
+            setClickableButtons(["Deal"]);
         }
         else if (caller == "Stand") {
 
             if (dealerTotal >= 17 || dealerTotal > playerTotal) {
                 if (dealerTotal > 21 || playerTotal > dealerTotal) {
-                    setHandWinner("Player")
-                    endRound(100)
-                    setClickableButtons(["Deal"])
+                    setHandWinner("Player");
+                    endRound(100);
+                    setClickableButtons(["Deal"]);
                 }
                 else if (dealerTotal > playerTotal) {
-                    setHandWinner("Dealer")
-                    endRound(0)
-                    setClickableButtons(["Deal"])
+                    setHandWinner("Dealer");
+                    endRound(0);
+                    setClickableButtons(["Deal"]);
                 }
                 else {
-                    setHandWinner("Draw")
-                    endRound(50)
-                    setClickableButtons(["Deal"])
+                    setHandWinner("Draw");
+                    endRound(50);
+                    setClickableButtons(["Deal"]);
                 }
                 return;
             }
 
-            const newSuit = suits[Math.floor(Math.random() * suits.length)]
-            const newRank = Math.floor((Math.random() * 10)) + 1
-            const newCard = { suit: newSuit, rank: newRank, faceup: true }
+            const newSuit = suits[Math.floor(Math.random() * suits.length)];
+            const newRank = Math.floor((Math.random() * 10)) + 1;
+            const newCard = { suit: newSuit, rank: newRank, faceup: true };
             dealerCardsLocal = dealerCardsLocal.concat(newCard);
 
             // THIS CANNOT BE DONE BECAUSE DEALERCARDS IS NOT GUARENTEED TO BE UPDATED IMMEDIATELY!
