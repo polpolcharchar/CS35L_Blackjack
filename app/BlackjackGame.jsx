@@ -105,10 +105,12 @@ export default function BlackjackGame() {
         if (playerTotal > 21) {
             setHandWinner("Dealer")
             endRound(0)
+            setClickableButtons(["Deal, Reset"])
         }
         else if (dealerTotal > 21) {
             setHandWinner("Player")
             endRound(100)
+            setClickableButtons(["Deal, Reset"])
         }
         else if (caller == "Stand") {
             const test = dealerTotal
@@ -153,7 +155,14 @@ export default function BlackjackGame() {
 
     return (
         <>
-            <BlackjackInterface handleClick={handleClick} dealerCards={dealerCards} playerCards={playerCards} handWinner={handWinner} playerScore={score} />
+            <BlackjackInterface
+            handleClick={handleClick}
+            dealerCards={dealerCards}
+            playerCards={playerCards}
+            handWinner={handWinner}
+            playerScore={score}
+            dealButtonDisabled={clickableButtons.findIndex(a => a == "Deal") == -1}
+            />
         </>
     )
 }

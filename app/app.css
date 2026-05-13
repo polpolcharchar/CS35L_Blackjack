@@ -57,11 +57,16 @@ body {
   border-radius: 50%;
   border-width: 5px;
   padding: 20px;
+  margin: 10px;
 
   width: 100px;
   height: 100px;
 
   justify-content: center;
+}
+
+.uiButton:disabled{
+  background-color:#005386
 }
 
 .marginLeft{
