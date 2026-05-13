@@ -64,17 +64,16 @@ export default function BlackjackGame() {
             const cards = pullCard(4);
             setPlayerCards(playerCards.concat(cards[0], cards[2]));
             setDealerCards(dealerCards.concat(cards[1], cards[3]));
-            checkGameState("Deal");
             setClickableButtons(["Hit", "Stand", "Reset"]);
+            checkGameState("Deal");
         }
         else if (type == "Hit") {            
             setPlayerCards(playerCards.concat(pullCard()));
-            checkGameState("Hit");
             setClickableButtons(["Hit", "Stand", "Reset"]);
+            checkGameState("Hit");
         }
         else if (type == "Stand") {
             checkGameState("Stand");
-            setClickableButtons(["Deal", "Reset"]);
         }
         else if (type == "Reset") {
             setPlayerCards([]);
@@ -105,12 +104,12 @@ export default function BlackjackGame() {
         if (playerTotal > 21) {
             setHandWinner("Dealer")
             endRound(0)
-            setClickableButtons(["Deal, Reset"])
+            setClickableButtons(["Deal"])
         }
         else if (dealerTotal > 21) {
             setHandWinner("Player")
             endRound(100)
-            setClickableButtons(["Deal, Reset"])
+            setClickableButtons(["Deal"])
         }
         else if (caller == "Stand") {
             const test = dealerTotal
@@ -132,14 +131,17 @@ export default function BlackjackGame() {
             if (dealerTotal > 21 || playerTotal > dealerTotal) {
                 setHandWinner("Player")
                 endRound(100)
+                setClickableButtons(["Deal"])
             }
             else if (dealerTotal > playerTotal) {
                 setHandWinner("Dealer")
                 endRound(0)
+                setClickableButtons(["Deal"])
             }
             else {
                 setHandWinner("Draw")
                 endRound(50)
+                setClickableButtons(["Deal"])
             }
         }
     }
@@ -162,6 +164,9 @@ export default function BlackjackGame() {
             handWinner={handWinner}
             playerScore={score}
             dealButtonDisabled={clickableButtons.findIndex(a => a == "Deal") == -1}
+            hitButtonDisabled={clickableButtons.findIndex(a => a == "Hit") == -1}
+            standButtonDisabled={clickableButtons.findIndex(a => a == "Stand") == -1}
+            resetButtonDisabled={clickableButtons.findIndex(a => a == "Reset") == -1}
             />
         </>
     )

@@ -9,7 +9,10 @@ export default function BlackjackInterface({
     playerCards,
     handWinner,
     playerScore,
-    dealButtonDisabled
+    dealButtonDisabled,
+    hitButtonDisabled,
+    standButtonDisabled,
+    resetButtonDisabled
 }) {
     
     return (
@@ -26,10 +29,10 @@ export default function BlackjackInterface({
                     <PlayingCardHand cards={playerCards} />
                 </div>
                 <div>
-                    <button disabled={dealButtonDisabled} className="uiButton marginLeft" onClick={() => handleClick("Deal")}>Deal</button>
-                    <button enabled="true" className="uiButton" onClick={() => handleClick("Hit")}>Hit</button>
-                    <button className="uiButton" onClick={() => handleClick("Stand")}>Stand</button>
-                    <button className="uiButton" onClick={() => handleClick("Reset")}>Reset</button>
+                    <button disabled={dealButtonDisabled} className="uiButton" onClick={() => handleClick("Deal")}>Deal</button>
+                    <button disabled={hitButtonDisabled}  className="uiButton" onClick={() => handleClick("Hit")}>Hit</button>
+                    <button disabled={standButtonDisabled} className="uiButton" onClick={() => handleClick("Stand")}>Stand</button>
+                    <button disabled={resetButtonDisabled} className="uiButton" onClick={() => handleClick("Reset")}>Reset</button>
                 </div>
             </div>
 
