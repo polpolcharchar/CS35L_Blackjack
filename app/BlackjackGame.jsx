@@ -54,7 +54,7 @@ export default function BlackjackGame() {
 
     const [playerCards, setPlayerCards] = useState([]);
 
-    const [clickableButtons, setClickableButtons] = useState(["Deal", "Reset"]);
+    const [clickableButtons, setClickableButtons] = useState(["Deal", "Bet", "Reset"]);
     function handleClick(type) {
         if (!clickableButtons.includes(type)) {
             return;
@@ -65,6 +65,9 @@ export default function BlackjackGame() {
             setDealerCards(dealerCards.concat(cards[1], cards[3]));
             setClickableButtons(["Hit", "Stand", "Reset"]);
             checkGameState("Deal");
+        }
+        else if (type == "Bet"){
+            
         }
         else if (type == "Hit") {
             setPlayerCards(playerCards.concat(pullCard()));
@@ -78,7 +81,7 @@ export default function BlackjackGame() {
             setPlayerCards([]);
             setDealerCards([]);
             resetDeck();
-            setClickableButtons(["Deal", "Reset"]);
+            setClickableButtons(["Deal", "Bet", "Reset"]);
             setScore(0);
             setHandWinner("");
         }
@@ -105,12 +108,10 @@ export default function BlackjackGame() {
         if (playerTotal > 21) {
             setHandWinner("Dealer");
             endRound(0);
-            setClickableButtons(["Deal"]);
         }
         else if (dealerTotal > 21) {
             setHandWinner("Player");
             endRound(100);
-            setClickableButtons(["Deal"]);
         }
         else if (caller == "Stand") {
 
@@ -118,17 +119,14 @@ export default function BlackjackGame() {
                 if (dealerTotal > 21 || playerTotal > dealerTotal) {
                     setHandWinner("Player");
                     endRound(100);
-                    setClickableButtons(["Deal"]);
                 }
                 else if (dealerTotal > playerTotal) {
                     setHandWinner("Dealer");
                     endRound(0);
-                    setClickableButtons(["Deal"]);
                 }
                 else {
                     setHandWinner("Draw");
                     endRound(50);
-                    setClickableButtons(["Deal"]);
                 }
                 return;
             }
@@ -154,7 +152,7 @@ export default function BlackjackGame() {
     function endRound(score) {
         setPlayerCards([]);
         setDealerCards([]);
-        setClickableButtons(["Deal", "Reset"]);
+        setClickableButtons(["Deal", "Bet", "Reset"]);
         setScore(prev => prev + score);
     }
 
@@ -167,6 +165,7 @@ export default function BlackjackGame() {
                 handWinner={handWinner}
                 playerScore={score}
                 dealButtonDisabled={clickableButtons.findIndex(a => a == "Deal") == -1}
+                betButtonDisabled={clickableButtons.findIndex(a => a == "Bet") == -1}
                 hitButtonDisabled={clickableButtons.findIndex(a => a == "Hit") == -1}
                 standButtonDisabled={clickableButtons.findIndex(a => a == "Stand") == -1}
                 resetButtonDisabled={clickableButtons.findIndex(a => a == "Reset") == -1}
