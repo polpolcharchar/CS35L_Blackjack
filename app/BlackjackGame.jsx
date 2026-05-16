@@ -94,6 +94,7 @@ export default function BlackjackGame() {
             setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset"]);
             setScore(100);
             setHandWinner("");
+            setHandsPlayed(0);
         }
     }
 
@@ -186,6 +187,7 @@ export default function BlackjackGame() {
             {
                 setHighScore(score);
             }
+            setClickableButtons(["Reset"]);
         }
     }
 
@@ -205,6 +207,7 @@ export default function BlackjackGame() {
                 hitButtonDisabled={clickableButtons.findIndex(a => a == "Hit") == -1}
                 standButtonDisabled={clickableButtons.findIndex(a => a == "Stand") == -1}
                 resetButtonDisabled={clickableButtons.findIndex(a => a == "Reset") == -1}
+                doneLevel={handsPlayed > 10}
             />
         </>
     )

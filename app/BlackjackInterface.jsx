@@ -16,7 +16,8 @@ export default function BlackjackInterface({
     clearBetButtonDisabled,
     hitButtonDisabled,
     standButtonDisabled,
-    resetButtonDisabled
+    resetButtonDisabled,
+    doneLevel
 }) {
     
     return (
@@ -50,6 +51,11 @@ export default function BlackjackInterface({
 
             <div>{handWinner && (
                     <h1>{handWinner} has won!</h1>
+                )}
+            </div>
+
+            <div>{doneLevel && (
+                    <h1>Your 10 hands are up. Press Reset to retry.</h1>
                 )}
             </div>
         </div>
