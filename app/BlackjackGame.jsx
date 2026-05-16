@@ -4,6 +4,8 @@ import BlackjackInterface from "./BlackjackInterface";
 
 
 const suits = ["h", "d", "c", "s"];
+const MAX_ROUNDS = 5;
+
 class PlayingCardObject {
     constructor(suit, rank, faceup) {
         this.suit = suit;
@@ -53,6 +55,7 @@ export default function BlackjackGame() {
     const [dealerCards, setDealerCards] = useState([]);
 
     const [playerCards, setPlayerCards] = useState([]);
+    const [roundsPlayed, setRoundsPlayed] = useState(0);
 
     const [clickableButtons, setClickableButtons] = useState(["Deal", "Reset"]);
     function handleClick(type) {
@@ -60,16 +63,23 @@ export default function BlackjackGame() {
             return;
         }
         if (type == "Deal") {
+            if (roundsPlayed >= MAX_ROUNDS) {
+                setHandWinner("Level complete");
+                return;
+            }
             const cards = pullCard(4);
-            setPlayerCards(playerCards.concat(cards[0], cards[2]));
-            setDealerCards(dealerCards.concat(cards[1], cards[3]));
+            const nextPlayerCards = playerCards.concat(cards[0], cards[2]);
+            const nextDealerCards = dealerCards.concat(cards[1], cards[3]);
+            setPlayerCards(nextPlayerCards);
+            setDealerCards(nextDealerCards);
             setClickableButtons(["Hit", "Stand", "Reset"]);
-            checkGameState("Deal");
+            checkGameState("Deal", nextPlayerCards, nextDealerCards);
         }
         else if (type == "Hit") {
-            setPlayerCards(playerCards.concat(pullCard()));
+            const nextPlayerCards = playerCards.concat(pullCard());
+            setPlayerCards(nextPlayerCards);
             setClickableButtons(["Hit", "Stand", "Reset"]);
-            checkGameState("Hit");
+            checkGameState("Hit", nextPlayerCards);
         }
         else if (type == "Stand") {
             checkGameState("Stand");
@@ -80,6 +90,7 @@ export default function BlackjackGame() {
             resetDeck();
             setClickableButtons(["Deal", "Reset"]);
             setScore(0);
+            setRoundsPlayed(0);
             setHandWinner("");
         }
     }
@@ -96,10 +107,10 @@ export default function BlackjackGame() {
         return total;
     }
 
-    function checkGameState(caller, dealerHand = dealerCards) {
+    function checkGameState(caller, playerHand = playerCards, dealerHand = dealerCards) {
         //dealerCards should be passed recursively because this function is recursive
         //In a recursive function call, hook is never updated
-        const playerTotal = getHandValue(playerCards)
+        const playerTotal = getHandValue(playerHand)
         let dealerCardsLocal = dealerHand.slice();
         let dealerTotal = getHandValue(dealerCardsLocal);
         if (playerTotal > 21) {
@@ -145,17 +156,21 @@ export default function BlackjackGame() {
             setDealerCards(dealerCardsLocal);
 
             setTimeout(() => {
-                checkGameState("Stand", dealerCardsLocal);
+                checkGameState("Stand", playerHand, dealerCardsLocal);
             }, 1000);
         }
     }
 
     const [score, setScore] = useState(0);
-    function endRound(score) {
+    function endRound(points) {
         setPlayerCards([]);
         setDealerCards([]);
-        setClickableButtons(["Deal", "Reset"]);
-        setScore(prev => prev + score);
+        setRoundsPlayed(prevRounds => {
+            const nextRounds = prevRounds + 1;
+            setClickableButtons(nextRounds >= MAX_ROUNDS ? ["Reset"] : ["Deal", "Reset"]);
+            return nextRounds;
+        });
+        setScore(prev => prev + points);
     }
 
     return (
@@ -166,6 +181,10 @@ export default function BlackjackGame() {
                 playerCards={playerCards}
                 handWinner={handWinner}
                 playerScore={score}
+                roundsPlayed={roundsPlayed}
+                maxRounds={MAX_ROUNDS}
+                levelComplete={roundsPlayed >= MAX_ROUNDS}
+                cardsRemaining={deck.length}
                 dealButtonDisabled={clickableButtons.findIndex(a => a == "Deal") == -1}
                 hitButtonDisabled={clickableButtons.findIndex(a => a == "Hit") == -1}
                 standButtonDisabled={clickableButtons.findIndex(a => a == "Stand") == -1}

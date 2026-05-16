@@ -9,6 +9,10 @@ export default function BlackjackInterface({
     playerCards,
     handWinner,
     playerScore,
+    roundsPlayed,
+    maxRounds,
+    levelComplete,
+    cardsRemaining,
     dealButtonDisabled,
     hitButtonDisabled,
     standButtonDisabled,
@@ -38,10 +42,15 @@ export default function BlackjackInterface({
 
             <div>
                 <h1>Player Score: {playerScore}</h1>
+                <h2>Round: {Math.min(roundsPlayed + 1, maxRounds)} of {maxRounds}</h2>
+                <h2>Cards Remaining: {cardsRemaining}</h2>
+                {levelComplete && (
+                    <h2>Level complete! Final Score: {playerScore}</h2>
+                )}
             </div>
 
             <div>{handWinner && (
-                    <h1>{handWinner} has won!</h1>
+                    <h1>{handWinner === "Draw" ? "Draw!" : `${handWinner} has won!`}</h1>
                 )}
             </div>
         </div>
