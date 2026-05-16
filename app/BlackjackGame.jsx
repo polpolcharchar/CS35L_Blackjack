@@ -50,6 +50,7 @@ export default function BlackjackGame() {
     }
 
     const [handWinner, setHandWinner] = useState("");
+    const [handsPlayed, setHandsPlayed] = useState(0);
     const [dealerCards, setDealerCards] = useState([]);
 
     const [playerCards, setPlayerCards] = useState([]);
@@ -158,6 +159,7 @@ export default function BlackjackGame() {
     }
 
     const [score, setScore] = useState(100);
+    const [highScore, setHighScore] = useState(0);
     function endRound(tScore) {
         setPlayerCards([]);
         setDealerCards([]);
@@ -175,6 +177,15 @@ export default function BlackjackGame() {
         {
             setScore(prev => prev + bet);
             setBet(0);
+        }
+        const amount = handsPlayed + 1;
+        setHandsPlayed(prev => prev + 1);
+        if (amount > 10)
+        {
+            if (score > highScore)
+            {
+                setHighScore(score);
+            }
         }
     }
 
