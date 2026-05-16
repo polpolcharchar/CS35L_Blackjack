@@ -10,8 +10,10 @@ export default function BlackjackInterface({
     handWinner,
     playerScore,
     highScore,
+    betScore,
     dealButtonDisabled,
-    betButtonDisabled,
+    addBetButtonDisabled,
+    clearBetButtonDisabled,
     hitButtonDisabled,
     standButtonDisabled,
     resetButtonDisabled
@@ -41,6 +43,7 @@ export default function BlackjackInterface({
             </div>
 
             <div>
+                <h1>Current Bet: {betScore}</h1>
                 <h1>Player Score: {playerScore}</h1>
                 <h1>High Score: {highScore}</h1>
             </div>

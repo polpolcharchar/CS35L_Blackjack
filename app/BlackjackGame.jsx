@@ -91,7 +91,7 @@ export default function BlackjackGame() {
             setDealerCards([]);
             resetDeck();
             setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset"]);
-            setScore(0);
+            setScore(100);
             setHandWinner("");
         }
     }
@@ -187,6 +187,7 @@ export default function BlackjackGame() {
                 handWinner={handWinner}
                 playerScore={score}
                 highScore={score}
+                betScore={bet}
                 dealButtonDisabled={clickableButtons.findIndex(a => a == "Deal") == -1}
                 addBetButtonDisabled={clickableButtons.findIndex(a => a == "Add Bet") == -1}
                 clearBetButtonDisabled={clickableButtons.findIndex(a => a == "Clear Bet") == -1}
