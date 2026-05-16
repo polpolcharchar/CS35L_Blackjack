@@ -197,7 +197,7 @@ export default function BlackjackGame() {
                 playerCards={playerCards}
                 handWinner={handWinner}
                 playerScore={score}
-                highScore={score}
+                highScore={highScore}
                 betScore={bet}
                 dealButtonDisabled={clickableButtons.findIndex(a => a == "Deal") == -1}
                 addBetButtonDisabled={clickableButtons.findIndex(a => a == "Add Bet") == -1}
