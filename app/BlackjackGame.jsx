@@ -54,7 +54,8 @@ export default function BlackjackGame() {
 
     const [playerCards, setPlayerCards] = useState([]);
 
-    const [clickableButtons, setClickableButtons] = useState(["Deal", "Bet", "Reset"]);
+    const [clickableButtons, setClickableButtons] = useState(["Deal", "Add Bet", "Clear Bet", "Reset"]);
+    const [bet, setBet] = useState(0);
     function handleClick(type) {
         if (!clickableButtons.includes(type)) {
             return;
@@ -66,8 +67,16 @@ export default function BlackjackGame() {
             setClickableButtons(["Hit", "Stand", "Reset"]);
             checkGameState("Deal");
         }
-        else if (type == "Bet"){
-            
+        else if (type == "Add Bet"){
+            if (score >= 50)
+            {
+                setBet(prev => prev + 50);
+                setScore(prev => prev - 50);
+            }
+        }
+        else if (type == "Clear Bet"){
+            setScore(prev => prev + bet);
+            setBet(0);
         }
         else if (type == "Hit") {
             setPlayerCards(playerCards.concat(pullCard()));
@@ -81,7 +90,7 @@ export default function BlackjackGame() {
             setPlayerCards([]);
             setDealerCards([]);
             resetDeck();
-            setClickableButtons(["Deal", "Bet", "Reset"]);
+            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset"]);
             setScore(0);
             setHandWinner("");
         }
@@ -148,12 +157,25 @@ export default function BlackjackGame() {
         }
     }
 
-    const [score, setScore] = useState(0);
-    function endRound(score) {
+    const [score, setScore] = useState(100);
+    function endRound(tScore) {
         setPlayerCards([]);
         setDealerCards([]);
-        setClickableButtons(["Deal", "Bet", "Reset"]);
-        setScore(prev => prev + score);
+        setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset"]);
+        if (tScore == 0)
+        {
+            setBet(0);
+        }
+        else if (tScore == 50)
+        {
+            setScore(prev => prev + bet / 2);
+            setBet(0);
+        }
+        else if (tScore == 100)
+        {
+            setScore(prev => prev + bet);
+            setBet(0);
+        }
     }
 
     return (
@@ -164,8 +186,10 @@ export default function BlackjackGame() {
                 playerCards={playerCards}
                 handWinner={handWinner}
                 playerScore={score}
+                highScore={score}
                 dealButtonDisabled={clickableButtons.findIndex(a => a == "Deal") == -1}
-                betButtonDisabled={clickableButtons.findIndex(a => a == "Bet") == -1}
+                addBetButtonDisabled={clickableButtons.findIndex(a => a == "Add Bet") == -1}
+                clearBetButtonDisabled={clickableButtons.findIndex(a => a == "Clear Bet") == -1}
                 hitButtonDisabled={clickableButtons.findIndex(a => a == "Hit") == -1}
                 standButtonDisabled={clickableButtons.findIndex(a => a == "Stand") == -1}
                 resetButtonDisabled={clickableButtons.findIndex(a => a == "Reset") == -1}

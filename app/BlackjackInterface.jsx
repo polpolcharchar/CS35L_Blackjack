@@ -9,6 +9,7 @@ export default function BlackjackInterface({
     playerCards,
     handWinner,
     playerScore,
+    highScore,
     dealButtonDisabled,
     betButtonDisabled,
     hitButtonDisabled,
@@ -31,7 +32,8 @@ export default function BlackjackInterface({
                 </div>
                 <div>
                     <button disabled={dealButtonDisabled} className="uiButton marginLeft" onClick={() => handleClick("Deal")}>Deal</button>
-                    <button disabled={betButtonDisabled} className="uiButton" onClick={() => handleClick("Bet")}>Bet</button>
+                    <button disabled={addBetButtonDisabled} className="uiButton" onClick={() => handleClick("Add Bet")}>Add Bet</button>
+                    <button disabled={clearBetButtonDisabled} className="uiButton" onClick={() => handleClick("Clear Bet")}>Clear Bet</button>
                     <button disabled={hitButtonDisabled}  className="uiButton" onClick={() => handleClick("Hit")}>Hit</button>
                     <button disabled={standButtonDisabled} className="uiButton" onClick={() => handleClick("Stand")}>Stand</button>
                     <button disabled={resetButtonDisabled} className="uiButton" onClick={() => handleClick("Reset")}>Reset</button>
@@ -40,6 +42,7 @@ export default function BlackjackInterface({
 
             <div>
                 <h1>Player Score: {playerScore}</h1>
+                <h1>High Score: {highScore}</h1>
             </div>
 
             <div>{handWinner && (
