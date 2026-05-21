@@ -50,7 +50,7 @@ export default function BlackjackInterface({
             </div>
 
             <div>{handWinner && (
-                    <h1>{handWinner} has won!</h1>
+                    <h1>{handWinner === "Draw" ? "Draw!" : `${handWinner} has won!`}</h1>
                 )}
             </div>
 
