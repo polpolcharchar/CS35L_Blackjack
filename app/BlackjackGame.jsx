@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import BlackjackInterface from "./BlackjackInterface";
 
-
-
 const suits = ["h", "d", "c", "s"];
 class PlayingCardObject {
     constructor(suit, rank, faceup) {
@@ -12,6 +10,277 @@ class PlayingCardObject {
     }
 
 }
+
+const deck1 = [
+  new PlayingCardObject('d', 10, true),
+  new PlayingCardObject('s', 9, true),
+  new PlayingCardObject('d', 3, true),
+  new PlayingCardObject('c', 4, true),
+  new PlayingCardObject('s', 8, true),
+  new PlayingCardObject('h', 11, true),
+  new PlayingCardObject('c', 9, true),
+  new PlayingCardObject('c', 5, true),
+  new PlayingCardObject('c', 11, true),
+  new PlayingCardObject('c', 3, true),
+  new PlayingCardObject('d', 13, true),
+  new PlayingCardObject('s', 6, true),
+  new PlayingCardObject('c', 8, true),
+  new PlayingCardObject('h', 8, true),
+  new PlayingCardObject('d', 2, true),
+  new PlayingCardObject('d', 9, true),
+  new PlayingCardObject('c', 12, true),
+  new PlayingCardObject('s', 10, true),
+  new PlayingCardObject('h', 13, true),
+  new PlayingCardObject('s', 13, true),
+  new PlayingCardObject('h', 1, true),
+  new PlayingCardObject('d', 1, true),
+  new PlayingCardObject('c', 13, true),
+  new PlayingCardObject('d', 12, true),
+  new PlayingCardObject('h', 12, true),
+  new PlayingCardObject('d', 8, true),
+  new PlayingCardObject('c', 10, true),
+  new PlayingCardObject('d', 6, true),
+  new PlayingCardObject('s', 1, true),
+  new PlayingCardObject('s', 4, true),
+  new PlayingCardObject('c', 1, true),
+  new PlayingCardObject('h', 3, true),
+  new PlayingCardObject('h', 2, true),
+  new PlayingCardObject('d', 4, true),
+  new PlayingCardObject('h', 10, true),
+  new PlayingCardObject('h', 4, true),
+  new PlayingCardObject('s', 12, true),
+  new PlayingCardObject('h', 6, true),
+  new PlayingCardObject('h', 7, true),
+  new PlayingCardObject('d', 5, true),
+  new PlayingCardObject('h', 5, true),
+  new PlayingCardObject('s', 2, true),
+  new PlayingCardObject('s', 5, true),
+  new PlayingCardObject('c', 2, true),
+  new PlayingCardObject('d', 7, true),
+  new PlayingCardObject('s', 3, true),
+  new PlayingCardObject('c', 7, true),
+  new PlayingCardObject('c', 6, true),
+  new PlayingCardObject('d', 11, true),
+  new PlayingCardObject('s', 7, true),
+  new PlayingCardObject('h', 9, true),
+  new PlayingCardObject('s', 11, true),
+];
+const deck2 = [
+  new PlayingCardObject('c', 9, true),
+  new PlayingCardObject('h', 11, true),
+  new PlayingCardObject('h', 3, true),
+  new PlayingCardObject('s', 13, true),
+  new PlayingCardObject('h', 6, true),
+  new PlayingCardObject('s', 11, true),
+  new PlayingCardObject('c', 5, true),
+  new PlayingCardObject('c', 7, true),
+  new PlayingCardObject('c', 8, true),
+  new PlayingCardObject('d', 2, true),
+  new PlayingCardObject('d', 9, true),
+  new PlayingCardObject('d', 1, true),
+  new PlayingCardObject('c', 11, true),
+  new PlayingCardObject('c', 13, true),
+  new PlayingCardObject('d', 6, true),
+  new PlayingCardObject('s', 1, true),
+  new PlayingCardObject('s', 5, true),
+  new PlayingCardObject('d', 12, true),
+  new PlayingCardObject('s', 8, true),
+  new PlayingCardObject('d', 7, true),
+  new PlayingCardObject('c', 10, true),
+  new PlayingCardObject('h', 4, true),
+  new PlayingCardObject('h', 8, true),
+  new PlayingCardObject('d', 3, true),
+  new PlayingCardObject('h', 1, true),
+  new PlayingCardObject('h', 2, true),
+  new PlayingCardObject('c', 4, true),
+  new PlayingCardObject('d', 8, true),
+  new PlayingCardObject('h', 9, true),
+  new PlayingCardObject('d', 13, true),
+  new PlayingCardObject('s', 4, true),
+  new PlayingCardObject('d', 4, true),
+  new PlayingCardObject('s', 3, true),
+  new PlayingCardObject('h', 12, true),
+  new PlayingCardObject('s', 7, true),
+  new PlayingCardObject('h', 7, true),
+  new PlayingCardObject('d', 11, true),
+  new PlayingCardObject('h', 5, true),
+  new PlayingCardObject('s', 9, true),
+  new PlayingCardObject('h', 13, true),
+  new PlayingCardObject('d', 5, true),
+  new PlayingCardObject('c', 1, true),
+  new PlayingCardObject('s', 2, true),
+  new PlayingCardObject('h', 10, true),
+  new PlayingCardObject('s', 10, true),
+  new PlayingCardObject('c', 6, true),
+  new PlayingCardObject('s', 12, true),
+  new PlayingCardObject('c', 2, true),
+  new PlayingCardObject('d', 10, true),
+  new PlayingCardObject('s', 6, true),
+  new PlayingCardObject('c', 12, true),
+  new PlayingCardObject('c', 3, true),
+];
+const deck3 = [
+  new PlayingCardObject('c', 4, true),
+  new PlayingCardObject('d', 4, true),
+  new PlayingCardObject('c', 13, true),
+  new PlayingCardObject('s', 4, true),
+  new PlayingCardObject('h', 6, true),
+  new PlayingCardObject('h', 8, true),
+  new PlayingCardObject('d', 2, true),
+  new PlayingCardObject('h', 9, true),
+  new PlayingCardObject('c', 7, true),
+  new PlayingCardObject('s', 3, true),
+  new PlayingCardObject('s', 7, true),
+  new PlayingCardObject('s', 13, true),
+  new PlayingCardObject('h', 3, true),
+  new PlayingCardObject('c', 9, true),
+  new PlayingCardObject('d', 1, true),
+  new PlayingCardObject('d', 13, true),
+  new PlayingCardObject('h', 13, true),
+  new PlayingCardObject('h', 1, true),
+  new PlayingCardObject('d', 7, true),
+  new PlayingCardObject('h', 7, true),
+  new PlayingCardObject('c', 5, true),
+  new PlayingCardObject('s', 11, true),
+  new PlayingCardObject('s', 6, true),
+  new PlayingCardObject('c', 2, true),
+  new PlayingCardObject('c', 3, true),
+  new PlayingCardObject('d', 12, true),
+  new PlayingCardObject('c', 12, true),
+  new PlayingCardObject('s', 12, true),
+  new PlayingCardObject('d', 6, true),
+  new PlayingCardObject('d', 8, true),
+  new PlayingCardObject('h', 12, true),
+  new PlayingCardObject('h', 10, true),
+  new PlayingCardObject('h', 11, true),
+  new PlayingCardObject('s', 1, true),
+  new PlayingCardObject('s', 10, true),
+  new PlayingCardObject('d', 9, true),
+  new PlayingCardObject('h', 5, true),
+  new PlayingCardObject('d', 10, true),
+  new PlayingCardObject('c', 1, true),
+  new PlayingCardObject('c', 6, true),
+  new PlayingCardObject('c', 10, true),
+  new PlayingCardObject('s', 2, true),
+  new PlayingCardObject('d', 11, true),
+  new PlayingCardObject('h', 2, true),
+  new PlayingCardObject('c', 8, true),
+  new PlayingCardObject('d', 3, true),
+  new PlayingCardObject('s', 8, true),
+  new PlayingCardObject('s', 9, true),
+  new PlayingCardObject('c', 11, true),
+  new PlayingCardObject('h', 4, true),
+  new PlayingCardObject('d', 5, true),
+  new PlayingCardObject('s', 5, true),
+];
+const deck4 = [
+  new PlayingCardObject('d', 11, true),
+  new PlayingCardObject('c', 9, true),
+  new PlayingCardObject('h', 13, true),
+  new PlayingCardObject('d', 7, true),
+  new PlayingCardObject('c', 13, true),
+  new PlayingCardObject('h', 9, true),
+  new PlayingCardObject('h', 10, true),
+  new PlayingCardObject('c', 12, true),
+  new PlayingCardObject('s', 13, true),
+  new PlayingCardObject('s', 9, true),
+  new PlayingCardObject('h', 11, true),
+  new PlayingCardObject('c', 6, true),
+  new PlayingCardObject('d', 9, true),
+  new PlayingCardObject('h', 5, true),
+  new PlayingCardObject('d', 6, true),
+  new PlayingCardObject('h', 3, true),
+  new PlayingCardObject('c', 2, true),
+  new PlayingCardObject('c', 5, true),
+  new PlayingCardObject('s', 5, true),
+  new PlayingCardObject('c', 11, true),
+  new PlayingCardObject('h', 12, true),
+  new PlayingCardObject('h', 6, true),
+  new PlayingCardObject('d', 8, true),
+  new PlayingCardObject('s', 3, true),
+  new PlayingCardObject('c', 1, true),
+  new PlayingCardObject('c', 8, true),
+  new PlayingCardObject('s', 2, true),
+  new PlayingCardObject('h', 1, true),
+  new PlayingCardObject('s', 4, true),
+  new PlayingCardObject('s', 12, true),
+  new PlayingCardObject('d', 12, true),
+  new PlayingCardObject('c', 7, true),
+  new PlayingCardObject('d', 1, true),
+  new PlayingCardObject('h', 8, true),
+  new PlayingCardObject('d', 4, true),
+  new PlayingCardObject('s', 8, true),
+  new PlayingCardObject('s', 10, true),
+  new PlayingCardObject('d', 10, true),
+  new PlayingCardObject('h', 4, true),
+  new PlayingCardObject('d', 2, true),
+  new PlayingCardObject('h', 7, true),
+  new PlayingCardObject('h', 2, true),
+  new PlayingCardObject('d', 13, true),
+  new PlayingCardObject('s', 6, true),
+  new PlayingCardObject('c', 4, true),
+  new PlayingCardObject('c', 3, true),
+  new PlayingCardObject('c', 10, true),
+  new PlayingCardObject('s', 11, true),
+  new PlayingCardObject('s', 1, true),
+  new PlayingCardObject('d', 5, true),
+  new PlayingCardObject('s', 7, true),
+  new PlayingCardObject('d', 3, true),
+];
+const deck5 = [
+  new PlayingCardObject('d', 1, true),
+  new PlayingCardObject('d', 11, true),
+  new PlayingCardObject('s', 4, true),
+  new PlayingCardObject('h', 9, true),
+  new PlayingCardObject('c', 9, true),
+  new PlayingCardObject('d', 6, true),
+  new PlayingCardObject('h', 4, true),
+  new PlayingCardObject('s', 8, true),
+  new PlayingCardObject('h', 5, true),
+  new PlayingCardObject('d', 12, true),
+  new PlayingCardObject('d', 7, true),
+  new PlayingCardObject('d', 3, true),
+  new PlayingCardObject('c', 6, true),
+  new PlayingCardObject('c', 3, true),
+  new PlayingCardObject('h', 1, true),
+  new PlayingCardObject('d', 9, true),
+  new PlayingCardObject('h', 13, true),
+  new PlayingCardObject('c', 13, true),
+  new PlayingCardObject('d', 2, true),
+  new PlayingCardObject('h', 12, true),
+  new PlayingCardObject('s', 3, true),
+  new PlayingCardObject('c', 8, true),
+  new PlayingCardObject('s', 1, true),
+  new PlayingCardObject('h', 10, true),
+  new PlayingCardObject('c', 12, true),
+  new PlayingCardObject('d', 13, true),
+  new PlayingCardObject('h', 6, true),
+  new PlayingCardObject('d', 5, true),
+  new PlayingCardObject('d', 10, true),
+  new PlayingCardObject('h', 2, true),
+  new PlayingCardObject('h', 7, true),
+  new PlayingCardObject('s', 6, true),
+  new PlayingCardObject('c', 2, true),
+  new PlayingCardObject('d', 8, true),
+  new PlayingCardObject('s', 9, true),
+  new PlayingCardObject('s', 12, true),
+  new PlayingCardObject('s', 7, true),
+  new PlayingCardObject('s', 13, true),
+  new PlayingCardObject('s', 5, true),
+  new PlayingCardObject('c', 5, true),
+  new PlayingCardObject('s', 11, true),
+  new PlayingCardObject('c', 7, true),
+  new PlayingCardObject('c', 11, true),
+  new PlayingCardObject('d', 4, true),
+  new PlayingCardObject('c', 10, true),
+  new PlayingCardObject('h', 8, true),
+  new PlayingCardObject('h', 11, true),
+  new PlayingCardObject('s', 10, true),
+  new PlayingCardObject('h', 3, true),
+  new PlayingCardObject('c', 4, true),
+  new PlayingCardObject('c', 1, true),
+  new PlayingCardObject('s', 2, true),
+];
 
 export default function BlackjackGame() {
 
@@ -112,6 +381,57 @@ export default function BlackjackGame() {
         else if (type == "Levels")
         {
             setMode("Levels");
+            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Level1", "Level2", "Level3", "Level4", "Level5"]);
+        }
+        else if (type == "Level1")
+        {
+            setPlayerCards([]);
+            setDealerCards([]);
+            setDeck(deck1);
+            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels"]);
+            setScore(100);
+            setHandWinner("");
+            setHandsPlayed(0);
+        }
+        else if (type == "Level2")
+        {
+            setPlayerCards([]);
+            setDealerCards([]);
+            setDeck(deck2);
+            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels"]);
+            setScore(100);
+            setHandWinner("");
+            setHandsPlayed(0);
+        }
+        else if (type == "Level3")
+        {
+            setPlayerCards([]);
+            setDealerCards([]);
+            setDeck(deck3);
+            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels"]);
+            setScore(100);
+            setHandWinner("");
+            setHandsPlayed(0);
+        }
+        else if (type == "Level4")
+        {
+            setPlayerCards([]);
+            setDealerCards([]);
+            setDeck(deck4);
+            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels"]);
+            setScore(100);
+            setHandWinner("");
+            setHandsPlayed(0);
+        }
+        else if (type == "Level5")
+        {
+            setPlayerCards([]);
+            setDealerCards([]);
+            setDeck(deck5);
+            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels"]);
+            setScore(100);
+            setHandWinner("");
+            setHandsPlayed(0);
         }
     }
 
