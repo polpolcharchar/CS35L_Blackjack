@@ -17,12 +17,35 @@ export default function BlackjackInterface({
     hitButtonDisabled,
     standButtonDisabled,
     resetButtonDisabled,
-    doneLevel
+    doneLevel,
+    inLevels
 }) {
     
     return (
         <div className="uiCard">
             {/* Hit, stand, reset, money display, card display, remaining cards in deck, round counter */}
+            <div>
+                <button disabled={false} className="uiButton marginLeft" onClick={() => handleClick("Random")}>Random</button>
+                {!inLevels && (
+                    <button disabled={false} className="uiButton" onClick={() => handleClick("Levels")}>Levels</button>
+                )}
+                {inLevels && (
+                    <button disabled={false} className="uiButton" onClick={() => handleClick("Level1")}>Level 1</button>
+                )}
+                {inLevels && (
+                    <button disabled={false} className="uiButton" onClick={() => handleClick("Level2")}>Level 2</button>
+                )}
+                {inLevels && (
+                    <button disabled={false} className="uiButton" onClick={() => handleClick("Level3")}>Level 3</button>
+                )}
+                {inLevels && (
+                    <button disabled={false} className="uiButton" onClick={() => handleClick("Level4")}>Level 4</button>
+                )}
+                {inLevels && (
+                    <button disabled={false} className="uiButton" onClick={() => handleClick("Level5")}>Level 5</button>
+                )}
+            </div>
+
             <div>
                 <h1>Dealer</h1>{/*make this bold*/}
                 <PlayingCardHand cards={dealerCards} />
