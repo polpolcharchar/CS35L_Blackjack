@@ -4,7 +4,7 @@ export default function PlayingCardHand({cards}){
 
 
     return (
-        <div style={{display: "flex", justifyContent: "center"}}>
+        <div className="playingCardHand">
             {cards.map((card, index) => 
                 <PlayingCard key={index} suit={card.suit} rank={card.rank} faceup={card.faceup}/>
             )}
