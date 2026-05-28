@@ -352,9 +352,10 @@ export default function BlackjackGame() {
             setBet(0);
         }
         else if (type == "Hit") {
-            setPlayerCards(playerCards.concat(pullCard()));
+            const nextPlayerCards = playerCards.concat(pullCard());
+            setPlayerCards(nextPlayerCards);
             setClickableButtons(["Hit", "Stand", "Reset", "Random", "Levels"]);
-            checkGameState("Hit");
+            checkGameState("Hit", dealerCards, nextPlayerCards);
         }
         else if (type == "Stand") {
             checkGameState("Stand");
@@ -454,10 +455,10 @@ export default function BlackjackGame() {
         return total;
     }
 
-    function checkGameState(caller, dealerHand = dealerCards) {
+    function checkGameState(caller, dealerHand = dealerCards, playerHand = playerCards) {
         //dealerCards should be passed recursively because this function is recursive
         //In a recursive function call, hook is never updated
-        const playerTotal = getHandValue(playerCards)
+        const playerTotal = getHandValue(playerHand)
         let dealerCardsLocal = dealerHand.slice();
         let dealerTotal = getHandValue(dealerCardsLocal);
         if (playerTotal > 21) {
