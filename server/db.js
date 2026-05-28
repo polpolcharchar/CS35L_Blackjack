@@ -1,5 +1,12 @@
 import mongoose from "mongoose";
 
+const scoreSchema = new mongoose.Schema({
+  username: String,
+  score: Number,
+  level: Number
+});
+let Score;
+
 export const connectDB = async () => {
   try {
     const uri = process.env.MONGO_URI;
@@ -14,8 +21,23 @@ export const connectDB = async () => {
 
     await mongoose.connect(uri, options);
     console.log("MongoDB connected");
+
+    Score = mongoose.model("Score", scoreSchema);
+    console.log("Created models");
+
   } catch (err) {
     console.error("MongoDB connection error:", err?.message ?? err);
     process.exit(1);
   }
 };
+
+export const addScore = async (username, score, level) => {
+  const scoreRecord = new Score({username, score, level});
+
+  await scoreRecord.save();
+}
+
+export const queryScore = async (username) => {
+  const user = Score.findOne({username: username});
+  return user;
+}
