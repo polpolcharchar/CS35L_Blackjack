@@ -335,10 +335,13 @@ export default function BlackjackGame() {
         }
         if (type == "Deal") {
             const cards = pullCard(4);
-            setPlayerCards(playerCards.concat(cards[0], cards[2]));
-            setDealerCards(dealerCards.concat(cards[1], cards[3]));
+            const nextPlayerCards = [cards[0], cards[2]];
+            const nextDealerCards = [cards[1], cards[3]];
+            setPlayerCards(nextPlayerCards);
+            setDealerCards(nextDealerCards);
+            setHandWinner("");
             setClickableButtons(["Hit", "Stand", "Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5"]);
-            checkGameState("Deal");
+            checkGameState("Deal", nextDealerCards, nextPlayerCards);
         }
         else if (type == "Add Bet"){
             if (score >= 50)
@@ -512,8 +515,6 @@ export default function BlackjackGame() {
     const [highScoreL4, setHighScoreL4] = useState(0);
     const [highScoreL5, setHighScoreL5] = useState(0);
     function endRound(tScore) {
-        setPlayerCards([]);
-        setDealerCards([]);
         setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5"]);
         if (tScore == 0)
         {
