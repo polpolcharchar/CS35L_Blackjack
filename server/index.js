@@ -15,7 +15,7 @@ app.use(express.json());
 const start = async () => {
   await connectDB();
 
-  await addScore("Jack", 100, 0);
+  await addScore("Jack", 200, 0);
   const result = await queryScore("Jack");
   console.log("Result: ", result);
 
@@ -28,5 +28,7 @@ const start = async () => {
 app.get("/api/test", (req, res) => {
   res.json({ message: "Backend connected" });
 });
+
+// app.get("/leaderboard")
 
 start();

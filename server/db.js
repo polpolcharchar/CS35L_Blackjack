@@ -37,7 +37,21 @@ export const addScore = async (username, score, level) => {
   await scoreRecord.save();
 }
 
-export const queryScore = async (username) => {
-  const user = Score.findOne({username: username});
-  return user;
+export const queryAllUsersScores = async (username) => {
+  const scores = Score.find({username: username});
+  return scores;
+}
+
+export const queryAllUsersScoresForLevel = async (username, level) => {
+  const scores = Score.find({username: username, level: level});
+  return scores;
+}
+
+export const queryTopScoresForLevel = async (level, limit = 20) => {
+  if(limit > 50){
+    throw new RangeError("Invalid Number of Records Requested! Limit: 50");
+  }
+
+  const scores = Score.find({level: level}).limit(limit);
+  return scores;
 }
