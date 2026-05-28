@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import { addScore, connectDB, queryScore } from "./db.js";
+import * as DatabaseModule from "./db.js";
 
 dotenv.config();
 
@@ -13,10 +13,10 @@ app.use(cors({
 app.use(express.json());
 
 const start = async () => {
-  await connectDB();
+  await DatabaseModule.connectDB();
 
-  await addScore("Jack", 200, 0);
-  const result = await queryScore("Jack");
+  await DatabaseModule.addScore("Jack", 200, 0);
+  const result = await DatabaseModule.queryAllUsersScores("Jack");
   console.log("Result: ", result);
 
   app.listen(5000, () => {
@@ -29,6 +29,26 @@ app.get("/api/test", (req, res) => {
   res.json({ message: "Backend connected" });
 });
 
-// app.get("/leaderboard")
+app.post("/postScore", (req, res) => {
+  //validate parameters are provided in request body
+  if(
+    !req.body.username
+    || !req.body.score
+    || !req.body.level
+  ){
+    throw new Error("Invalid request body!");
+  }
+
+  //check for invalid parameter values
+  if(username.length == 0
+    || score < 0
+    || level < 0
+  ){
+    throw new Error("Invalid parameter values!");
+  }
+
+  DatabaseModule.addScore(username, score, level);
+
+});
 
 start();
