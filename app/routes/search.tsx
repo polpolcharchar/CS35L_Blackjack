@@ -14,12 +14,16 @@ export default function Search() {
         <div className="flex gap-3">
           <input
             type="text"
-            placeholder="Search by username..."
+            placeholder="Enter username here to search."
             className="rounded border border-green-700 bg-green-900 px-4 py-2 text-white placeholder-green-400"
           />
           <button className="rounded bg-white px-4 py-2 font-semibold text-green-950">
             Search
           </button>
+        </div>
+
+        <div className="flex flex-col gap-3">
+          {/* player list will go here */}
         </div>
 
       </section>
