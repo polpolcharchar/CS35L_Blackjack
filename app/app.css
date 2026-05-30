@@ -17,23 +17,35 @@ body {
   color: black;
 }
 
+.playingCardHand{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  min-height: 170px;
+  padding: 8px;
+}
+
 .playingCard{
-  background-color: #EEEEAA;
-  padding-top: 100px;
-  padding-bottom: 100px;
-  padding-left: 30px;
-  padding-right: 30px;
-  font-size:x-large;
-  font-weight: bold;
-  
-  border-radius: 10px;
-  border: #000000;
-  border-width: 5px;
-  border-style: solid;
+  width: 112px;
+  aspect-ratio: 5 / 7;
+  border-radius: 8px;
+  background-color: #f8fafc;
+  box-shadow: 0 10px 20px rgb(0 0 0 / 20%);
+  overflow: hidden;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
 
-  width: fit-content;
+.playingCard:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 14px 26px rgb(0 0 0 / 26%);
+}
 
-  margin: 10px;
+.playingCardImage{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .uiCard{
