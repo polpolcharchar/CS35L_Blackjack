@@ -636,7 +636,50 @@ export default function BlackjackGame() {
         else if (type == "Reset") {
             setPlayerCards([]);
             setDealerCards([]);
-            resetDeck();
+            if (level == 0)
+            {
+                resetDeck();
+            }
+            else if (level == 1)
+            {
+                setDeck(deck1);
+            }
+            else if (level == 2)
+            {
+                setDeck(deck2);
+            }
+            else if (level == 3)
+            {
+                setDeck(deck3);
+            }
+            else if (level == 4)
+            {
+                setDeck(deck4);
+            }
+            else if (level == 5)
+            {
+                setDeck(deck5);
+            }
+            else if (level == 6)
+            {
+                setDeck(deck6);
+            }
+            else if (level == 7)
+            {
+                setDeck(deck7);
+            }
+            else if (level == 8)
+            {
+                setDeck(deck8);
+            }
+            else if (level == 9)
+            {
+                setDeck(deck9);
+            }
+            else if (level == 10)
+            {
+                setDeck(deck10);
+            }
             setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
             setScore(100);
             setHandWinner("");
