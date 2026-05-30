@@ -281,6 +281,276 @@ const deck5 = [
   new PlayingCardObject('c', 1, true),
   new PlayingCardObject('s', 2, true),
 ];
+const deck6 = [
+  new PlayingCardObject('s', 9, true),
+  new PlayingCardObject('c', 12, true),
+  new PlayingCardObject('s', 7, true),
+  new PlayingCardObject('s', 8, true),
+  new PlayingCardObject('h', 4, true),
+  new PlayingCardObject('h', 8, true),
+  new PlayingCardObject('c', 6, true),
+  new PlayingCardObject('s', 11, true),
+  new PlayingCardObject('d', 9, true),
+  new PlayingCardObject('s', 3, true),
+  new PlayingCardObject('s', 6, true),
+  new PlayingCardObject('c', 9, true),
+  new PlayingCardObject('d', 13, true),
+  new PlayingCardObject('d', 6, true),
+  new PlayingCardObject('c', 4, true),
+  new PlayingCardObject('c', 1, true),
+  new PlayingCardObject('h', 12, true),
+  new PlayingCardObject('s', 4, true),
+  new PlayingCardObject('d', 7, true),
+  new PlayingCardObject('h', 7, true),
+  new PlayingCardObject('h', 5, true),
+  new PlayingCardObject('c', 10, true),
+  new PlayingCardObject('c', 13, true),
+  new PlayingCardObject('c', 8, true),
+  new PlayingCardObject('s', 10, true),
+  new PlayingCardObject('h', 2, true),
+  new PlayingCardObject('h', 10, true),
+  new PlayingCardObject('c', 11, true),
+  new PlayingCardObject('h', 13, true),
+  new PlayingCardObject('c', 7, true),
+  new PlayingCardObject('h', 9, true),
+  new PlayingCardObject('d', 2, true),
+  new PlayingCardObject('s', 13, true),
+  new PlayingCardObject('d', 11, true),
+  new PlayingCardObject('c', 3, true),
+  new PlayingCardObject('c', 5, true),
+  new PlayingCardObject('h', 3, true),
+  new PlayingCardObject('d', 8, true),
+  new PlayingCardObject('h', 11, true),
+  new PlayingCardObject('d', 4, true),
+  new PlayingCardObject('h', 6, true),
+  new PlayingCardObject('h', 1, true),
+  new PlayingCardObject('s', 5, true),
+  new PlayingCardObject('d', 3, true),
+  new PlayingCardObject('d', 1, true),
+  new PlayingCardObject('s', 1, true),
+  new PlayingCardObject('d', 5, true),
+  new PlayingCardObject('d', 10, true),
+  new PlayingCardObject('s', 2, true),
+  new PlayingCardObject('c', 2, true),
+  new PlayingCardObject('s', 12, true),
+  new PlayingCardObject('d', 12, true),
+];
+const deck7 = [
+  new PlayingCardObject('s', 11, true),
+  new PlayingCardObject('d', 7, true),
+  new PlayingCardObject('s', 3, true),
+  new PlayingCardObject('d', 1, true),
+  new PlayingCardObject('c', 1, true),
+  new PlayingCardObject('d', 2, true),
+  new PlayingCardObject('c', 8, true),
+  new PlayingCardObject('d', 4, true),
+  new PlayingCardObject('c', 6, true),
+  new PlayingCardObject('c', 5, true),
+  new PlayingCardObject('h', 13, true),
+  new PlayingCardObject('c', 7, true),
+  new PlayingCardObject('d', 12, true),
+  new PlayingCardObject('d', 9, true),
+  new PlayingCardObject('c', 12, true),
+  new PlayingCardObject('h', 11, true),
+  new PlayingCardObject('c', 9, true),
+  new PlayingCardObject('d', 11, true),
+  new PlayingCardObject('c', 13, true),
+  new PlayingCardObject('s', 13, true),
+  new PlayingCardObject('d', 10, true),
+  new PlayingCardObject('c', 4, true),
+  new PlayingCardObject('h', 5, true),
+  new PlayingCardObject('h', 8, true),
+  new PlayingCardObject('d', 5, true),
+  new PlayingCardObject('s', 4, true),
+  new PlayingCardObject('h', 10, true),
+  new PlayingCardObject('s', 5, true),
+  new PlayingCardObject('h', 2, true),
+  new PlayingCardObject('s', 1, true),
+  new PlayingCardObject('h', 9, true),
+  new PlayingCardObject('d', 6, true),
+  new PlayingCardObject('h', 7, true),
+  new PlayingCardObject('d', 3, true),
+  new PlayingCardObject('h', 4, true),
+  new PlayingCardObject('h', 3, true),
+  new PlayingCardObject('h', 1, true),
+  new PlayingCardObject('c', 11, true),
+  new PlayingCardObject('s', 2, true),
+  new PlayingCardObject('h', 12, true),
+  new PlayingCardObject('d', 13, true),
+  new PlayingCardObject('s', 8, true),
+  new PlayingCardObject('s', 7, true),
+  new PlayingCardObject('c', 2, true),
+  new PlayingCardObject('s', 9, true),
+  new PlayingCardObject('c', 10, true),
+  new PlayingCardObject('s', 10, true),
+  new PlayingCardObject('c', 3, true),
+  new PlayingCardObject('s', 6, true),
+  new PlayingCardObject('d', 8, true),
+  new PlayingCardObject('s', 12, true),
+  new PlayingCardObject('h', 6, true),
+];
+const deck8 = [
+  new PlayingCardObject('d', 2, true),
+  new PlayingCardObject('d', 9, true),
+  new PlayingCardObject('h', 10, true),
+  new PlayingCardObject('h', 11, true),
+  new PlayingCardObject('c', 1, true),
+  new PlayingCardObject('c', 10, true),
+  new PlayingCardObject('h', 1, true),
+  new PlayingCardObject('s', 8, true),
+  new PlayingCardObject('d', 7, true),
+  new PlayingCardObject('d', 4, true),
+  new PlayingCardObject('s', 4, true),
+  new PlayingCardObject('s', 9, true),
+  new PlayingCardObject('s', 7, true),
+  new PlayingCardObject('s', 13, true),
+  new PlayingCardObject('s', 6, true),
+  new PlayingCardObject('s', 5, true),
+  new PlayingCardObject('h', 3, true),
+  new PlayingCardObject('h', 9, true),
+  new PlayingCardObject('h', 2, true),
+  new PlayingCardObject('s', 11, true),
+  new PlayingCardObject('d', 12, true),
+  new PlayingCardObject('c', 5, true),
+  new PlayingCardObject('d', 5, true),
+  new PlayingCardObject('d', 11, true),
+  new PlayingCardObject('c', 8, true),
+  new PlayingCardObject('c', 6, true),
+  new PlayingCardObject('d', 8, true),
+  new PlayingCardObject('h', 6, true),
+  new PlayingCardObject('s', 3, true),
+  new PlayingCardObject('s', 2, true),
+  new PlayingCardObject('s', 12, true),
+  new PlayingCardObject('d', 1, true),
+  new PlayingCardObject('h', 5, true),
+  new PlayingCardObject('d', 3, true),
+  new PlayingCardObject('s', 10, true),
+  new PlayingCardObject('c', 3, true),
+  new PlayingCardObject('c', 2, true),
+  new PlayingCardObject('d', 10, true),
+  new PlayingCardObject('h', 13, true),
+  new PlayingCardObject('s', 1, true),
+  new PlayingCardObject('c', 9, true),
+  new PlayingCardObject('h', 7, true),
+  new PlayingCardObject('c', 13, true),
+  new PlayingCardObject('h', 4, true),
+  new PlayingCardObject('c', 7, true),
+  new PlayingCardObject('d', 6, true),
+  new PlayingCardObject('c', 12, true),
+  new PlayingCardObject('h', 12, true),
+  new PlayingCardObject('h', 8, true),
+  new PlayingCardObject('c', 11, true),
+  new PlayingCardObject('d', 13, true),
+  new PlayingCardObject('c', 4, true),
+];
+const deck9 = [
+  new PlayingCardObject('d', 2, true),
+  new PlayingCardObject('h', 5, true),
+  new PlayingCardObject('s', 1, true),
+  new PlayingCardObject('s', 6, true),
+  new PlayingCardObject('c', 11, true),
+  new PlayingCardObject('d', 12, true),
+  new PlayingCardObject('c', 6, true),
+  new PlayingCardObject('c', 3, true),
+  new PlayingCardObject('s', 8, true),
+  new PlayingCardObject('d', 11, true),
+  new PlayingCardObject('s', 13, true),
+  new PlayingCardObject('h', 7, true),
+  new PlayingCardObject('d', 3, true),
+  new PlayingCardObject('d', 7, true),
+  new PlayingCardObject('s', 10, true),
+  new PlayingCardObject('s', 12, true),
+  new PlayingCardObject('h', 10, true),
+  new PlayingCardObject('s', 2, true),
+  new PlayingCardObject('s', 4, true),
+  new PlayingCardObject('d', 4, true),
+  new PlayingCardObject('c', 4, true),
+  new PlayingCardObject('c', 5, true),
+  new PlayingCardObject('h', 9, true),
+  new PlayingCardObject('d', 8, true),
+  new PlayingCardObject('h', 11, true),
+  new PlayingCardObject('d', 5, true),
+  new PlayingCardObject('s', 7, true),
+  new PlayingCardObject('d', 10, true),
+  new PlayingCardObject('h', 12, true),
+  new PlayingCardObject('c', 10, true),
+  new PlayingCardObject('d', 1, true),
+  new PlayingCardObject('s', 3, true),
+  new PlayingCardObject('s', 5, true),
+  new PlayingCardObject('s', 9, true),
+  new PlayingCardObject('c', 1, true),
+  new PlayingCardObject('c', 13, true),
+  new PlayingCardObject('h', 1, true),
+  new PlayingCardObject('d', 13, true),
+  new PlayingCardObject('h', 4, true),
+  new PlayingCardObject('c', 9, true),
+  new PlayingCardObject('h', 13, true),
+  new PlayingCardObject('c', 2, true),
+  new PlayingCardObject('d', 6, true),
+  new PlayingCardObject('h', 3, true),
+  new PlayingCardObject('s', 11, true),
+  new PlayingCardObject('h', 8, true),
+  new PlayingCardObject('c', 12, true),
+  new PlayingCardObject('h', 2, true),
+  new PlayingCardObject('h', 6, true),
+  new PlayingCardObject('d', 9, true),
+  new PlayingCardObject('c', 8, true),
+  new PlayingCardObject('c', 7, true),
+];
+const deck10 = [
+  new PlayingCardObject('s', 2, true),
+  new PlayingCardObject('d', 10, true),
+  new PlayingCardObject('h', 2, true),
+  new PlayingCardObject('h', 4, true),
+  new PlayingCardObject('h', 12, true),
+  new PlayingCardObject('d', 13, true),
+  new PlayingCardObject('h', 5, true),
+  new PlayingCardObject('d', 4, true),
+  new PlayingCardObject('s', 4, true),
+  new PlayingCardObject('c', 2, true),
+  new PlayingCardObject('h', 13, true),
+  new PlayingCardObject('h', 1, true),
+  new PlayingCardObject('c', 1, true),
+  new PlayingCardObject('d', 11, true),
+  new PlayingCardObject('c', 11, true),
+  new PlayingCardObject('h', 7, true),
+  new PlayingCardObject('c', 12, true),
+  new PlayingCardObject('s', 9, true),
+  new PlayingCardObject('d', 12, true),
+  new PlayingCardObject('h', 10, true),
+  new PlayingCardObject('s', 3, true),
+  new PlayingCardObject('c', 10, true),
+  new PlayingCardObject('s', 6, true),
+  new PlayingCardObject('d', 6, true),
+  new PlayingCardObject('d', 1, true),
+  new PlayingCardObject('s', 13, true),
+  new PlayingCardObject('s', 11, true),
+  new PlayingCardObject('s', 5, true),
+  new PlayingCardObject('d', 5, true),
+  new PlayingCardObject('c', 4, true),
+  new PlayingCardObject('d', 2, true),
+  new PlayingCardObject('d', 3, true),
+  new PlayingCardObject('d', 7, true),
+  new PlayingCardObject('c', 5, true),
+  new PlayingCardObject('c', 9, true),
+  new PlayingCardObject('s', 1, true),
+  new PlayingCardObject('c', 6, true),
+  new PlayingCardObject('s', 12, true),
+  new PlayingCardObject('c', 7, true),
+  new PlayingCardObject('s', 7, true),
+  new PlayingCardObject('h', 9, true),
+  new PlayingCardObject('h', 6, true),
+  new PlayingCardObject('c', 3, true),
+  new PlayingCardObject('h', 11, true),
+  new PlayingCardObject('d', 9, true),
+  new PlayingCardObject('d', 8, true),
+  new PlayingCardObject('s', 10, true),
+  new PlayingCardObject('h', 8, true),
+  new PlayingCardObject('s', 8, true),
+  new PlayingCardObject('h', 3, true),
+  new PlayingCardObject('c', 13, true),
+  new PlayingCardObject('c', 8, true),
+];
 
 export default function BlackjackGame() {
 
@@ -340,7 +610,7 @@ export default function BlackjackGame() {
             setPlayerCards(nextPlayerCards);
             setDealerCards(nextDealerCards);
             setHandWinner("");
-            setClickableButtons(["Hit", "Stand", "Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5"]);
+            setClickableButtons(["Hit", "Stand", "Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
             checkGameState("Deal", nextDealerCards, nextPlayerCards);
         }
         else if (type == "Add Bet"){
@@ -367,7 +637,7 @@ export default function BlackjackGame() {
             setPlayerCards([]);
             setDealerCards([]);
             resetDeck();
-            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5"]);
+            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
             setScore(100);
             setHandWinner("");
             setHandsPlayed(0);
@@ -378,7 +648,7 @@ export default function BlackjackGame() {
             setPlayerCards([]);
             setDealerCards([]);
             resetDeck();
-            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5"]);
+            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
             setScore(100);
             setHandWinner("");
             setHandsPlayed(0);
@@ -387,14 +657,14 @@ export default function BlackjackGame() {
         else if (type == "Levels")
         {
             setMode("Levels");
-            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Level1", "Level2", "Level3", "Level4", "Level5"]);
+            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
         }
         else if (type == "Level1")
         {
             setPlayerCards([]);
             setDealerCards([]);
             setDeck(deck1);
-            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5"]);
+            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
             setScore(100);
             setHandWinner("");
             setHandsPlayed(0);
@@ -405,7 +675,7 @@ export default function BlackjackGame() {
             setPlayerCards([]);
             setDealerCards([]);
             setDeck(deck2);
-            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5"]);
+            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
             setScore(100);
             setHandWinner("");
             setHandsPlayed(0);
@@ -416,7 +686,7 @@ export default function BlackjackGame() {
             setPlayerCards([]);
             setDealerCards([]);
             setDeck(deck3);
-            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5"]);
+            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
             setScore(100);
             setHandWinner("");
             setHandsPlayed(0);
@@ -427,7 +697,7 @@ export default function BlackjackGame() {
             setPlayerCards([]);
             setDealerCards([]);
             setDeck(deck4);
-            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5"]);
+            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
             setScore(100);
             setHandWinner("");
             setHandsPlayed(0);
@@ -438,11 +708,66 @@ export default function BlackjackGame() {
             setPlayerCards([]);
             setDealerCards([]);
             setDeck(deck5);
-            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5"]);
+            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
             setScore(100);
             setHandWinner("");
             setHandsPlayed(0);
             setLevel(5);
+        }
+        else if (type == "Level6")
+        {
+            setPlayerCards([]);
+            setDealerCards([]);
+            setDeck(deck6);
+            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
+            setScore(100);
+            setHandWinner("");
+            setHandsPlayed(0);
+            setLevel(6);
+        }
+        else if (type == "Level7")
+        {
+            setPlayerCards([]);
+            setDealerCards([]);
+            setDeck(deck7);
+            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
+            setScore(100);
+            setHandWinner("");
+            setHandsPlayed(0);
+            setLevel(7);
+        }
+        else if (type == "Level8")
+        {
+            setPlayerCards([]);
+            setDealerCards([]);
+            setDeck(deck8);
+            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
+            setScore(100);
+            setHandWinner("");
+            setHandsPlayed(0);
+            setLevel(8);
+        }
+        else if (type == "Level9")
+        {
+            setPlayerCards([]);
+            setDealerCards([]);
+            setDeck(deck9);
+            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
+            setScore(100);
+            setHandWinner("");
+            setHandsPlayed(0);
+            setLevel(9);
+        }
+        else if (type == "Level10")
+        {
+            setPlayerCards([]);
+            setDealerCards([]);
+            setDeck(deck10);
+            setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
+            setScore(100);
+            setHandWinner("");
+            setHandsPlayed(0);
+            setLevel(10);
         }
     }
 
@@ -514,8 +839,13 @@ export default function BlackjackGame() {
     const [highScoreL3, setHighScoreL3] = useState(0);
     const [highScoreL4, setHighScoreL4] = useState(0);
     const [highScoreL5, setHighScoreL5] = useState(0);
+    const [highScoreL6, setHighScoreL6] = useState(0);
+    const [highScoreL7, setHighScoreL7] = useState(0);
+    const [highScoreL8, setHighScoreL8] = useState(0);
+    const [highScoreL9, setHighScoreL9] = useState(0);
+    const [highScoreL10, setHighScoreL10] = useState(0);
     function endRound(tScore) {
-        setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5"]);
+        setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
         if (tScore == 0)
         {
             setBet(0);
@@ -540,7 +870,7 @@ export default function BlackjackGame() {
                 {
                     setHighScore(score);
                 }
-                setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5"]);
+                setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
             }
             else if (level == 1)
             {
@@ -548,7 +878,7 @@ export default function BlackjackGame() {
                 {
                     setHighScoreL1(score);
                 }
-                setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5"]);
+                setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
             }
             else if (level == 2)
             {
@@ -556,7 +886,7 @@ export default function BlackjackGame() {
                 {
                     setHighScoreL2(score);
                 }
-                setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5"]);
+                setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
             }
             else if (level == 3)
             {
@@ -564,7 +894,7 @@ export default function BlackjackGame() {
                 {
                     setHighScoreL3(score);
                 }
-                setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5"]);
+                setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
             }
             else if (level == 4)
             {
@@ -572,7 +902,7 @@ export default function BlackjackGame() {
                 {
                     setHighScoreL4(score);
                 }
-                setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5"]);
+                setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
             }
             else if (level == 5)
             {
@@ -580,7 +910,47 @@ export default function BlackjackGame() {
                 {
                     setHighScoreL5(score);
                 }
-                setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5"]);
+                setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
+            }
+            else if (level == 6)
+            {
+                if (score > highScoreL6)
+                {
+                    setHighScoreL6(score);
+                }
+                setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
+            }
+            else if (level == 7)
+            {
+                if (score > highScoreL7)
+                {
+                    setHighScoreL7(score);
+                }
+                setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
+            }
+            else if (level == 8)
+            {
+                if (score > highScoreL8)
+                {
+                    setHighScoreL8(score);
+                }
+                setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
+            }
+            else if (level == 9)
+            {
+                if (score > highScoreL9)
+                {
+                    setHighScoreL9(score);
+                }
+                setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
+            }
+            else if (level == 10)
+            {
+                if (score > highScoreL10)
+                {
+                    setHighScoreL10(score);
+                }
+                setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
             }
         }
     }
@@ -593,7 +963,7 @@ export default function BlackjackGame() {
                 playerCards={playerCards}
                 handWinner={handWinner}
                 playerScore={score}
-                highScore={(level == 0 && highScore) + (level == 1 && highScoreL1) + (level == 2 && highScoreL2) + (level == 3 && highScoreL3) + (level == 4 && highScoreL4) + (level == 5 && highScoreL5)}
+                highScore={(level == 0 && highScore) + (level == 1 && highScoreL1) + (level == 2 && highScoreL2) + (level == 3 && highScoreL3) + (level == 4 && highScoreL4) + (level == 5 && highScoreL5) + (level == 6 && highScoreL6) + (level == 7 && highScoreL7) + (level == 8 && highScoreL8) + (level == 9 && highScoreL9) + (level == 10 && highScoreL10)}
                 betScore={bet}
                 dealButtonDisabled={clickableButtons.findIndex(a => a == "Deal") == -1}
                 addBetButtonDisabled={clickableButtons.findIndex(a => a == "Add Bet") == -1}

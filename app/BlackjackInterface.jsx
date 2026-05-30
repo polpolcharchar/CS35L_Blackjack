@@ -22,7 +22,7 @@ export default function BlackjackInterface({
         <div className="tableLayout">
             <div className="uiCard">
 
-                <div className="tableTitle">♠ Blackjack ♠</div>
+                <div className="tableTitle">Blackjack</div>
 
                 <div className="buttonRow">
                     <button className="uiButtonSecondary" onClick={() => handleClick("Random")}>
@@ -40,6 +40,11 @@ export default function BlackjackInterface({
                             <button className="uiButtonSecondary" onClick={() => handleClick("Level3")}>Level 3</button>
                             <button className="uiButtonSecondary" onClick={() => handleClick("Level4")}>Level 4</button>
                             <button className="uiButtonSecondary" onClick={() => handleClick("Level5")}>Level 5</button>
+                            <button className="uiButtonSecondary" onClick={() => handleClick("Level6")}>Level 6</button>
+                            <button className="uiButtonSecondary" onClick={() => handleClick("Level7")}>Level 7</button>
+                            <button className="uiButtonSecondary" onClick={() => handleClick("Level8")}>Level 8</button>
+                            <button className="uiButtonSecondary" onClick={() => handleClick("Level9")}>Level 9</button>
+                            <button className="uiButtonSecondary" onClick={() => handleClick("Level10")}>Level 10</button>
                         </>
                     )}
                 </div>
