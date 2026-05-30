@@ -1,90 +1,201 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans: "Georgia", ui-serif, serif;
 }
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  background-color: #1a3a1a;
+  color: #f5e6c8;
+  font-family: Georgia, ui-serif, serif;
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
-
-  background-color: white;
-  color: black;
 }
 
-.playingCardHand{
+.tableLayout {
+  min-height: 100vh;
+  background-color: #1a3a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+.uiCard {
+  background-color: #1c4a1c;
+  border: 6px solid #5c3a1e;
+  border-radius: 24px;
+  padding: 28px 32px;
+  width: 100%;
+  max-width: 860px;
+}
+
+.tableTitle {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: #d4af5a;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.feltDivider {
+  border: none;
+  border-top: 1px solid rgba(212, 175, 90, 0.3);
+  margin: 16px 0;
+}
+
+.sectionLabel {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #d4af5a;
+  opacity: 0.85;
+  margin: 0 0 8px 4px;
+}
+
+.playingCardHand {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 14px;
-  min-height: 170px;
+  min-height: 150px;
   padding: 8px;
 }
 
-.playingCard{
-  width: 112px;
+.playingCard {
+  width: 100px;
   aspect-ratio: 5 / 7;
   border-radius: 8px;
   background-color: #f8fafc;
-  box-shadow: 0 10px 20px rgb(0 0 0 / 20%);
   overflow: hidden;
-  transition: transform 160ms ease, box-shadow 160ms ease;
 }
 
-.playingCard:hover{
-  transform: translateY(-4px);
-  box-shadow: 0 14px 26px rgb(0 0 0 / 26%);
+.playingCard:hover {
+  outline: 2px solid #d4af5a;
 }
 
-.playingCardImage{
+.playingCardImage {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.uiCard{
-
-  background-color: #999999;
-
-  border: #222222;
-  border-style: solid;
-  border-radius: 10px;
-  border-width: 1px;
-
-  /* width: fit-content; */
-
-  padding: 10px;
-  margin: 10px;
-}
-
-.uiButton{
-  background-color: #009dff;
-  border-style: solid;
-  border-radius: 50%;
-  border-width: 5px;
-  padding: 20px;
-  margin: 10px;
-
-  width: 120px;
-  height: 120px;
-
+.statsRow {
+  display: flex;
+  gap: 12px;
   justify-content: center;
+  flex-wrap: wrap;
+  margin: 12px 0;
 }
 
-.uiButton:disabled{
-  background-color:#005386
+.statChip {
+  background-color: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(212, 175, 90, 0.35);
+  border-radius: 8px;
+  padding: 8px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 110px;
 }
 
-.marginLeft{
-  margin-left: 10%;
+.statLabel {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #d4af5a;
+  opacity: 0.7;
+  margin-bottom: 2px;
 }
 
-.middleMargin{
-  margin-left: 36%;
+.statValue {
+  font-size: 20px;
+  font-weight: 600;
+  color: #f5e6c8;
+}
+
+.winnerBanner {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #d4af5a;
+  padding: 10px 0 4px;
+}
+
+.levelBanner {
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: #f5e6c8;
+  opacity: 0.75;
+  padding: 4px 0;
+}
+
+.buttonRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.uiButton {
+  font-family: Georgia, ui-serif, serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  background-color: #c9a33e;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  min-width: 88px;
+  cursor: pointer;
+  outline: none;
+}
+
+.uiButton:hover:not(:disabled) {
+  background-color: #d4af5a;
+}
+
+.uiButton:disabled {
+  background-color: #4a4a4a;
+  color: #888;
+  cursor: not-allowed;
+}
+
+.uiButtonSecondary {
+  font-family: Georgia, ui-serif, serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #d4af5a;
+  background-color: transparent;
+  border: 1px solid rgba(212, 175, 90, 0.45);
+  border-radius: 6px;
+  padding: 8px 16px;
+  min-width: 80px;
+  cursor: pointer;
+  outline: none;
+}
+
+.uiButtonSecondary:hover:not(:disabled) {
+  background-color: rgba(212, 175, 90, 0.15);
+  border-color: #d4af5a;
+}
+
+.uiButtonSecondary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }

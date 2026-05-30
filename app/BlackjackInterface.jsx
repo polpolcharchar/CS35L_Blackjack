@@ -1,7 +1,4 @@
 import PlayingCardHand from "./PlayingCardHand";
-import { useState } from "react";
-
-
 
 export default function BlackjackInterface({
     handleClick,
@@ -20,68 +17,86 @@ export default function BlackjackInterface({
     doneLevel,
     inLevels
 }) {
-    
+
     return (
-        <div className="uiCard">
-            {/* Hit, stand, reset, money display, card display, remaining cards in deck, round counter */}
-            <div>
-                <button disabled={false} className="uiButton marginLeft" onClick={() => handleClick("Random")}>Random</button>
-                {!inLevels && (
-                    <button disabled={false} className="uiButton" onClick={() => handleClick("Levels")}>Levels</button>
-                )}
-                {inLevels && (
-                    <button disabled={false} className="uiButton" onClick={() => handleClick("Level1")}>Level 1</button>
-                )}
-                {inLevels && (
-                    <button disabled={false} className="uiButton" onClick={() => handleClick("Level2")}>Level 2</button>
-                )}
-                {inLevels && (
-                    <button disabled={false} className="uiButton" onClick={() => handleClick("Level3")}>Level 3</button>
-                )}
-                {inLevels && (
-                    <button disabled={false} className="uiButton" onClick={() => handleClick("Level4")}>Level 4</button>
-                )}
-                {inLevels && (
-                    <button disabled={false} className="uiButton" onClick={() => handleClick("Level5")}>Level 5</button>
-                )}
-            </div>
+        <div className="tableLayout">
+            <div className="uiCard">
 
-            <div>
-                <h1>Dealer</h1>{/*make this bold*/}
-                <PlayingCardHand cards={dealerCards} />
-            </div>
+                <div className="tableTitle">♠ Blackjack ♠</div>
 
-            <div>
+                <div className="buttonRow">
+                    <button className="uiButtonSecondary" onClick={() => handleClick("Random")}>
+                        Random
+                    </button>
+                    {!inLevels && (
+                        <button className="uiButtonSecondary" onClick={() => handleClick("Levels")}>
+                            Levels
+                        </button>
+                    )}
+                    {inLevels && (
+                        <>
+                            <button className="uiButtonSecondary" onClick={() => handleClick("Level1")}>Level 1</button>
+                            <button className="uiButtonSecondary" onClick={() => handleClick("Level2")}>Level 2</button>
+                            <button className="uiButtonSecondary" onClick={() => handleClick("Level3")}>Level 3</button>
+                            <button className="uiButtonSecondary" onClick={() => handleClick("Level4")}>Level 4</button>
+                            <button className="uiButtonSecondary" onClick={() => handleClick("Level5")}>Level 5</button>
+                        </>
+                    )}
+                </div>
+
+                <hr className="feltDivider" />
+
                 <div>
-                    <h1>Player</h1>{/*make this bold*/}
+                    <p className="sectionLabel">Dealer</p>
+                    <PlayingCardHand cards={dealerCards} />
+                </div>
+
+                <hr className="feltDivider" />
+
+                <div>
+                    <p className="sectionLabel">Player</p>
                     <PlayingCardHand cards={playerCards} />
                 </div>
-                <div>
-                    <button disabled={dealButtonDisabled} className="uiButton marginLeft" onClick={() => handleClick("Deal")}>Deal</button>
-                    <button disabled={addBetButtonDisabled} className="uiButton" onClick={() => handleClick("Add Bet")}>Add Bet</button>
-                    <button disabled={clearBetButtonDisabled} className="uiButton" onClick={() => handleClick("Clear Bet")}>Clear Bet</button>
-                    <button disabled={hitButtonDisabled}  className="uiButton" onClick={() => handleClick("Hit")}>Hit</button>
-                    <button disabled={standButtonDisabled} className="uiButton" onClick={() => handleClick("Stand")}>Stand</button>
-                    <button disabled={resetButtonDisabled} className="uiButton" onClick={() => handleClick("Reset")}>Reset</button>
+
+                <div className="buttonRow">
+                    <button disabled={dealButtonDisabled}      className="uiButton" onClick={() => handleClick("Deal")}>Deal</button>
+                    <button disabled={addBetButtonDisabled}    className="uiButton" onClick={() => handleClick("Add Bet")}>Add Bet</button>
+                    <button disabled={clearBetButtonDisabled}  className="uiButton" onClick={() => handleClick("Clear Bet")}>Clear Bet</button>
+                    <button disabled={hitButtonDisabled}       className="uiButton" onClick={() => handleClick("Hit")}>Hit</button>
+                    <button disabled={standButtonDisabled}     className="uiButton" onClick={() => handleClick("Stand")}>Stand</button>
+                    <button disabled={resetButtonDisabled}     className="uiButton" onClick={() => handleClick("Reset")}>Reset</button>
                 </div>
-            </div>
 
-            <div>
-                <h1>Current Bet: {betScore}</h1>
-                <h1>Player Score: {playerScore}</h1>
-                <h1>High Score: {highScore}</h1>
-            </div>
+                <hr className="feltDivider" />
 
-            <div>{handWinner && (
-                    <h1>{handWinner === "Draw" ? "Draw!" : `${handWinner} has won!`}</h1>
+                <div className="statsRow">
+                    <div className="statChip">
+                        <span className="statLabel">Current Bet</span>
+                        <span className="statValue">{betScore}</span>
+                    </div>
+                    <div className="statChip">
+                        <span className="statLabel">Score</span>
+                        <span className="statValue">{playerScore}</span>
+                    </div>
+                    <div className="statChip">
+                        <span className="statLabel">High Score</span>
+                        <span className="statValue">{highScore}</span>
+                    </div>
+                </div>
+
+                {handWinner && (
+                    <div className="winnerBanner">
+                        {handWinner === "Draw" ? "— Draw —" : `${handWinner} Wins!`}
+                    </div>
                 )}
-            </div>
 
-            <div>{doneLevel && (
-                    <h1>Your 10 hands are up. Press Reset to retry.</h1>
+                {doneLevel && (
+                    <div className="levelBanner">
+                        Your 10 hands are up. Press Reset to retry.
+                    </div>
                 )}
+
             </div>
         </div>
-    )
-
+    );
 }
