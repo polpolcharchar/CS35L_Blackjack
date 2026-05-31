@@ -8,6 +8,9 @@ export default function BlackjackInterface({
     playerScore,
     highScore,
     betScore,
+    playerName,
+    onPlayerNameChange,
+    scoreSubmitMessage,
     dealButtonDisabled,
     addBetButtonDisabled,
     clearBetButtonDisabled,
@@ -51,6 +54,19 @@ export default function BlackjackInterface({
 
                 <hr className="feltDivider" />
 
+                <label className="playerNameField">
+                    <span className="statLabel">Player Name</span>
+                    <input
+                        className="playerNameInput"
+                        type="text"
+                        value={playerName}
+                        onChange={(event) => onPlayerNameChange(event.target.value)}
+                        maxLength={24}
+                    />
+                </label>
+
+                <hr className="feltDivider" />
+
                 <div>
                     <p className="sectionLabel">Dealer</p>
                     <PlayingCardHand cards={dealerCards} />
@@ -64,12 +80,12 @@ export default function BlackjackInterface({
                 </div>
 
                 <div className="buttonRow">
-                    <button disabled={dealButtonDisabled}      className="uiButton" onClick={() => handleClick("Deal")}>Deal</button>
-                    <button disabled={addBetButtonDisabled}    className="uiButton" onClick={() => handleClick("Add Bet")}>Add Bet</button>
-                    <button disabled={clearBetButtonDisabled}  className="uiButton" onClick={() => handleClick("Clear Bet")}>Clear Bet</button>
-                    <button disabled={hitButtonDisabled}       className="uiButton" onClick={() => handleClick("Hit")}>Hit</button>
-                    <button disabled={standButtonDisabled}     className="uiButton" onClick={() => handleClick("Stand")}>Stand</button>
-                    <button disabled={resetButtonDisabled}     className="uiButton" onClick={() => handleClick("Reset")}>Reset</button>
+                    <button disabled={dealButtonDisabled} className="uiButton" onClick={() => handleClick("Deal")}>Deal</button>
+                    <button disabled={addBetButtonDisabled} className="uiButton" onClick={() => handleClick("Add Bet")}>Add Bet</button>
+                    <button disabled={clearBetButtonDisabled} className="uiButton" onClick={() => handleClick("Clear Bet")}>Clear Bet</button>
+                    <button disabled={hitButtonDisabled} className="uiButton" onClick={() => handleClick("Hit")}>Hit</button>
+                    <button disabled={standButtonDisabled} className="uiButton" onClick={() => handleClick("Stand")}>Stand</button>
+                    <button disabled={resetButtonDisabled} className="uiButton" onClick={() => handleClick("Reset")}>Reset</button>
                 </div>
 
                 <hr className="feltDivider" />
@@ -91,13 +107,19 @@ export default function BlackjackInterface({
 
                 {handWinner && (
                     <div className="winnerBanner">
-                        {handWinner === "Draw" ? "— Draw —" : `${handWinner} Wins!`}
+                        {handWinner === "Draw" ? "- Draw -" : `${handWinner} Wins!`}
                     </div>
                 )}
 
                 {doneLevel && (
                     <div className="levelBanner">
                         Your 10 hands are up. Press Reset to retry.
+                    </div>
+                )}
+
+                {scoreSubmitMessage && (
+                    <div className="levelBanner">
+                        {scoreSubmitMessage}
                     </div>
                 )}
 

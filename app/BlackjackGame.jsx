@@ -553,6 +553,10 @@ const deck10 = [
 ];
 
 export default function BlackjackGame() {
+    const getInitialPlayerName = () => {
+        if (typeof window === "undefined") return "Player";
+        return window.localStorage.getItem("blackjackPlayerName") || "Player";
+    }
 
     //Found Online - Helper function
     const shuffle = (array) => {
@@ -590,6 +594,8 @@ export default function BlackjackGame() {
 
     const [mode, setMode] = useState("Random");
     const [level, setLevel] = useState(0);
+    const [playerName, setPlayerName] = useState(getInitialPlayerName);
+    const [scoreSubmitMessage, setScoreSubmitMessage] = useState("");
     
     const [handWinner, setHandWinner] = useState("");
     const [handsPlayed, setHandsPlayed] = useState(0);
@@ -599,6 +605,46 @@ export default function BlackjackGame() {
 
     const [clickableButtons, setClickableButtons] = useState(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels"]);
     const [bet, setBet] = useState(0);
+    function handlePlayerNameChange(nextName) {
+        setPlayerName(nextName);
+        if (typeof window !== "undefined") {
+            window.localStorage.setItem("blackjackPlayerName", nextName);
+        }
+    }
+
+    async function submitScore(finalScore, scoreLevel) {
+        const username = playerName.trim();
+        if (username.length === 0) {
+            setScoreSubmitMessage("Enter a player name before submitting a score.");
+            return;
+        }
+
+        setScoreSubmitMessage("Submitting score...");
+
+        try {
+            const response = await fetch("http://localhost:5000/postScore", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    username,
+                    score: finalScore,
+                    level: scoreLevel
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error("Score submission failed.");
+            }
+
+            setScoreSubmitMessage("Score submitted.");
+        } catch (err) {
+            console.error("Score submission failed:", err);
+            setScoreSubmitMessage("Could not submit score. Is the server running?");
+        }
+    }
+
     function handleClick(type) {
         if (!clickableButtons.includes(type)) {
             return;
@@ -684,6 +730,7 @@ export default function BlackjackGame() {
             setScore(100);
             setHandWinner("");
             setHandsPlayed(0);
+            setScoreSubmitMessage("");
         }
         else if (type == "Random")
         {
@@ -696,6 +743,7 @@ export default function BlackjackGame() {
             setHandWinner("");
             setHandsPlayed(0);
             setLevel(0);
+            setScoreSubmitMessage("");
         }
         else if (type == "Levels")
         {
@@ -712,6 +760,7 @@ export default function BlackjackGame() {
             setHandWinner("");
             setHandsPlayed(0);
             setLevel(1);
+            setScoreSubmitMessage("");
         }
         else if (type == "Level2")
         {
@@ -723,6 +772,7 @@ export default function BlackjackGame() {
             setHandWinner("");
             setHandsPlayed(0);
             setLevel(2);
+            setScoreSubmitMessage("");
         }
         else if (type == "Level3")
         {
@@ -734,6 +784,7 @@ export default function BlackjackGame() {
             setHandWinner("");
             setHandsPlayed(0);
             setLevel(3);
+            setScoreSubmitMessage("");
         }
         else if (type == "Level4")
         {
@@ -745,6 +796,7 @@ export default function BlackjackGame() {
             setHandWinner("");
             setHandsPlayed(0);
             setLevel(4);
+            setScoreSubmitMessage("");
         }
         else if (type == "Level5")
         {
@@ -756,6 +808,7 @@ export default function BlackjackGame() {
             setHandWinner("");
             setHandsPlayed(0);
             setLevel(5);
+            setScoreSubmitMessage("");
         }
         else if (type == "Level6")
         {
@@ -767,6 +820,7 @@ export default function BlackjackGame() {
             setHandWinner("");
             setHandsPlayed(0);
             setLevel(6);
+            setScoreSubmitMessage("");
         }
         else if (type == "Level7")
         {
@@ -778,6 +832,7 @@ export default function BlackjackGame() {
             setHandWinner("");
             setHandsPlayed(0);
             setLevel(7);
+            setScoreSubmitMessage("");
         }
         else if (type == "Level8")
         {
@@ -789,6 +844,7 @@ export default function BlackjackGame() {
             setHandWinner("");
             setHandsPlayed(0);
             setLevel(8);
+            setScoreSubmitMessage("");
         }
         else if (type == "Level9")
         {
@@ -800,6 +856,7 @@ export default function BlackjackGame() {
             setHandWinner("");
             setHandsPlayed(0);
             setLevel(9);
+            setScoreSubmitMessage("");
         }
         else if (type == "Level10")
         {
@@ -811,6 +868,7 @@ export default function BlackjackGame() {
             setHandWinner("");
             setHandsPlayed(0);
             setLevel(10);
+            setScoreSubmitMessage("");
         }
     }
 
@@ -889,112 +947,116 @@ export default function BlackjackGame() {
     const [highScoreL10, setHighScoreL10] = useState(0);
     function endRound(tScore) {
         setClickableButtons(["Deal", "Add Bet", "Clear Bet", "Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
+        let nextScore = score;
         if (tScore == 0)
         {
             setBet(0);
         }
         else if (tScore == 50)
         {
-            setScore(prev => prev + bet);
+            nextScore = score + bet;
+            setScore(nextScore);
             setBet(0);
         }
         else if (tScore == 100)
         {
-            setScore(prev => prev + bet * 2);
+            nextScore = score + bet * 2;
+            setScore(nextScore);
             setBet(0);
         }
         const amount = handsPlayed + 1;
         setHandsPlayed(prev => prev + 1);
-        if (amount > 10)
+        if (amount >= 10)
         {
             if (level == 0)
             {
-                if (score > highScore)
+                if (nextScore > highScore)
                 {
-                    setHighScore(score);
+                    setHighScore(nextScore);
                 }
                 setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
             }
             else if (level == 1)
             {
-                if (score > highScoreL1)
+                if (nextScore > highScoreL1)
                 {
-                    setHighScoreL1(score);
+                    setHighScoreL1(nextScore);
                 }
                 setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
             }
             else if (level == 2)
             {
-                if (score > highScoreL2)
+                if (nextScore > highScoreL2)
                 {
-                    setHighScoreL2(score);
+                    setHighScoreL2(nextScore);
                 }
                 setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
             }
             else if (level == 3)
             {
-                if (score > highScoreL3)
+                if (nextScore > highScoreL3)
                 {
-                    setHighScoreL3(score);
+                    setHighScoreL3(nextScore);
                 }
                 setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
             }
             else if (level == 4)
             {
-                if (score > highScoreL4)
+                if (nextScore > highScoreL4)
                 {
-                    setHighScoreL4(score);
+                    setHighScoreL4(nextScore);
                 }
                 setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
             }
             else if (level == 5)
             {
-                if (score > highScoreL5)
+                if (nextScore > highScoreL5)
                 {
-                    setHighScoreL5(score);
+                    setHighScoreL5(nextScore);
                 }
                 setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
             }
             else if (level == 6)
             {
-                if (score > highScoreL6)
+                if (nextScore > highScoreL6)
                 {
-                    setHighScoreL6(score);
+                    setHighScoreL6(nextScore);
                 }
                 setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
             }
             else if (level == 7)
             {
-                if (score > highScoreL7)
+                if (nextScore > highScoreL7)
                 {
-                    setHighScoreL7(score);
+                    setHighScoreL7(nextScore);
                 }
                 setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
             }
             else if (level == 8)
             {
-                if (score > highScoreL8)
+                if (nextScore > highScoreL8)
                 {
-                    setHighScoreL8(score);
+                    setHighScoreL8(nextScore);
                 }
                 setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
             }
             else if (level == 9)
             {
-                if (score > highScoreL9)
+                if (nextScore > highScoreL9)
                 {
-                    setHighScoreL9(score);
+                    setHighScoreL9(nextScore);
                 }
                 setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
             }
             else if (level == 10)
             {
-                if (score > highScoreL10)
+                if (nextScore > highScoreL10)
                 {
-                    setHighScoreL10(score);
+                    setHighScoreL10(nextScore);
                 }
                 setClickableButtons(["Reset", "Random", "Levels", "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "Level7", "Level8", "Level9", "Level10"]);
             }
+            submitScore(nextScore, level);
         }
     }
 
@@ -1008,13 +1070,16 @@ export default function BlackjackGame() {
                 playerScore={score}
                 highScore={(level == 0 && highScore) + (level == 1 && highScoreL1) + (level == 2 && highScoreL2) + (level == 3 && highScoreL3) + (level == 4 && highScoreL4) + (level == 5 && highScoreL5) + (level == 6 && highScoreL6) + (level == 7 && highScoreL7) + (level == 8 && highScoreL8) + (level == 9 && highScoreL9) + (level == 10 && highScoreL10)}
                 betScore={bet}
+                playerName={playerName}
+                onPlayerNameChange={handlePlayerNameChange}
+                scoreSubmitMessage={scoreSubmitMessage}
                 dealButtonDisabled={clickableButtons.findIndex(a => a == "Deal") == -1}
                 addBetButtonDisabled={clickableButtons.findIndex(a => a == "Add Bet") == -1}
                 clearBetButtonDisabled={clickableButtons.findIndex(a => a == "Clear Bet") == -1}
                 hitButtonDisabled={clickableButtons.findIndex(a => a == "Hit") == -1}
                 standButtonDisabled={clickableButtons.findIndex(a => a == "Stand") == -1}
                 resetButtonDisabled={clickableButtons.findIndex(a => a == "Reset") == -1}
-                doneLevel={handsPlayed > 10}
+                doneLevel={handsPlayed >= 10}
                 inLevels={mode != "Random"}
             />
         </>

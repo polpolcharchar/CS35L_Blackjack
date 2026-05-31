@@ -95,6 +95,30 @@ body {
   margin: 12px 0;
 }
 
+.playerNameField {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 4px 0;
+}
+
+.playerNameInput {
+  font-family: Georgia, ui-serif, serif;
+  color: #f5e6c8;
+  background-color: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(212, 175, 90, 0.45);
+  border-radius: 6px;
+  padding: 8px 10px;
+  width: min(240px, 100%);
+  outline: none;
+}
+
+.playerNameInput:focus {
+  border-color: #d4af5a;
+}
+
 .statChip {
   background-color: rgba(0, 0, 0, 0.35);
   border: 1px solid rgba(212, 175, 90, 0.35);
