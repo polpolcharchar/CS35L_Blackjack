@@ -10,6 +10,12 @@ export default function BlackjackInterface({
     betScore,
     playerName,
     onPlayerNameChange,
+    playerPin,
+    onPlayerPinChange,
+    onLogin,
+    onLogout,
+    isAuthenticated,
+    authMessage,
     scoreSubmitMessage,
     dealButtonDisabled,
     addBetButtonDisabled,
@@ -54,16 +60,46 @@ export default function BlackjackInterface({
 
                 <hr className="feltDivider" />
 
-                <label className="playerNameField">
-                    <span className="statLabel">Player Name</span>
-                    <input
-                        className="playerNameInput"
-                        type="text"
-                        value={playerName}
-                        onChange={(event) => onPlayerNameChange(event.target.value)}
-                        maxLength={24}
-                    />
-                </label>
+                <div className="authPanel">
+                    <label className="playerNameField">
+                        <span className="statLabel">Player Name</span>
+                        <input
+                            className="playerNameInput"
+                            type="text"
+                            value={playerName}
+                            onChange={(event) => onPlayerNameChange(event.target.value)}
+                            maxLength={24}
+                            disabled={isAuthenticated}
+                        />
+                    </label>
+
+                    {!isAuthenticated && (
+                        <label className="playerNameField">
+                            <span className="statLabel">PIN</span>
+                            <input
+                                className="playerNameInput pinInput"
+                                type="password"
+                                value={playerPin}
+                                onChange={(event) => onPlayerPinChange(event.target.value)}
+                                maxLength={24}
+                            />
+                        </label>
+                    )}
+
+                    <button
+                        className="uiButtonSecondary"
+                        type="button"
+                        onClick={isAuthenticated ? onLogout : onLogin}
+                    >
+                        {isAuthenticated ? "Log Out" : "Log In"}
+                    </button>
+
+                    {authMessage && (
+                        <div className="authMessage">
+                            {authMessage}
+                        </div>
+                    )}
+                </div>
 
                 <hr className="feltDivider" />
 

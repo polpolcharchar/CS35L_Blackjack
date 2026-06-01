@@ -104,6 +104,14 @@ body {
   margin: 4px 0;
 }
 
+.authPanel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px 14px;
+  flex-wrap: wrap;
+}
+
 .playerNameInput {
   font-family: Georgia, ui-serif, serif;
   color: #f5e6c8;
@@ -115,8 +123,24 @@ body {
   outline: none;
 }
 
+.playerNameInput:disabled {
+  opacity: 0.7;
+}
+
+.pinInput {
+  width: min(140px, 100%);
+}
+
 .playerNameInput:focus {
   border-color: #d4af5a;
+}
+
+.authMessage {
+  width: 100%;
+  text-align: center;
+  color: #f5e6c8;
+  font-size: 12px;
+  opacity: 0.8;
 }
 
 .statChip {

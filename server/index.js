@@ -1,11 +1,13 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import crypto from "crypto";
 import * as DatabaseModule from "./db.js";
 
 dotenv.config();
 
 const app = express();
+const sessions = new Map();
 
 app.use(cors({
   origin: "http://localhost:5173"
@@ -25,13 +27,51 @@ app.get("/api/test", (req, res) => {
   res.json({ message: "Backend connected" });
 });
 
-app.post("/postScore", async (req, res) => {
-  try {
-    const { username, score, level } = req.body;
+const authenticate = (req, res, next) => {
+  const authHeader = req.get("authorization") ?? "";
+  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : "";
+  const session = sessions.get(token);
 
-    if (typeof username !== "string" || username.trim().length === 0) {
-      return res.status(400).json({ error: "username is required" });
-    }
+  if (!session) {
+    return res.status(401).json({ error: "Authentication required" });
+  }
+
+  req.user = session;
+  return next();
+};
+
+app.post("/auth/login", (req, res) => {
+  const { username, pin } = req.body;
+
+  if (typeof username !== "string" || username.trim().length === 0) {
+    return res.status(400).json({ error: "username is required" });
+  }
+
+  if (typeof pin !== "string" || pin.trim().length < 4) {
+    return res.status(400).json({ error: "PIN must be at least 4 characters" });
+  }
+
+  const trimmedUsername = username.trim();
+  const token = crypto.randomUUID();
+
+  sessions.set(token, {
+    username: trimmedUsername,
+    createdAt: new Date().toISOString()
+  });
+
+  return res.json({ token, username: trimmedUsername });
+});
+
+app.post("/auth/logout", authenticate, (req, res) => {
+  const token = req.get("authorization").slice(7);
+  sessions.delete(token);
+  return res.json({ message: "Logged out" });
+});
+
+app.post("/postScore", authenticate, async (req, res) => {
+  try {
+    const { score, level } = req.body;
+    const { username } = req.user;
 
     if (!Number.isFinite(score) || score < 0) {
       return res.status(400).json({ error: "score must be a nonnegative number" });
@@ -41,7 +81,7 @@ app.post("/postScore", async (req, res) => {
       return res.status(400).json({ error: "level must be a nonnegative integer" });
     }
 
-    const savedScore = await DatabaseModule.addScore(username.trim(), score, level);
+    const savedScore = await DatabaseModule.addScore(username, score, level);
 
     return res.status(201).json({ score: savedScore });
   } catch (err) {

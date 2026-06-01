@@ -557,6 +557,10 @@ export default function BlackjackGame() {
         if (typeof window === "undefined") return "Player";
         return window.localStorage.getItem("blackjackPlayerName") || "Player";
     }
+    const getInitialAuthToken = () => {
+        if (typeof window === "undefined") return "";
+        return window.localStorage.getItem("blackjackAuthToken") || "";
+    }
 
     //Found Online - Helper function
     const shuffle = (array) => {
@@ -595,6 +599,9 @@ export default function BlackjackGame() {
     const [mode, setMode] = useState("Random");
     const [level, setLevel] = useState(0);
     const [playerName, setPlayerName] = useState(getInitialPlayerName);
+    const [playerPin, setPlayerPin] = useState("");
+    const [authToken, setAuthToken] = useState(getInitialAuthToken);
+    const [authMessage, setAuthMessage] = useState(getInitialAuthToken() ? "Logged in." : "");
     const [scoreSubmitMessage, setScoreSubmitMessage] = useState("");
     
     const [handWinner, setHandWinner] = useState("");
@@ -612,10 +619,78 @@ export default function BlackjackGame() {
         }
     }
 
-    async function submitScore(finalScore, scoreLevel) {
+    async function handleLogin() {
         const username = playerName.trim();
         if (username.length === 0) {
-            setScoreSubmitMessage("Enter a player name before submitting a score.");
+            setAuthMessage("Enter a player name to log in.");
+            return;
+        }
+
+        if (playerPin.trim().length < 4) {
+            setAuthMessage("Enter a PIN with at least 4 characters.");
+            return;
+        }
+
+        setAuthMessage("Logging in...");
+
+        try {
+            const response = await fetch("http://localhost:5000/auth/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    username,
+                    pin: playerPin
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error("Login failed.");
+            }
+
+            const data = await response.json();
+            setAuthToken(data.token);
+            setPlayerName(data.username);
+            setPlayerPin("");
+            setAuthMessage(`Logged in as ${data.username}.`);
+
+            if (typeof window !== "undefined") {
+                window.localStorage.setItem("blackjackAuthToken", data.token);
+                window.localStorage.setItem("blackjackPlayerName", data.username);
+            }
+        } catch (err) {
+            console.error("Login failed:", err);
+            setAuthMessage("Could not log in. Is the server running?");
+        }
+    }
+
+    async function handleLogout() {
+        const token = authToken;
+        setAuthToken("");
+        setAuthMessage("Logged out.");
+
+        if (typeof window !== "undefined") {
+            window.localStorage.removeItem("blackjackAuthToken");
+        }
+
+        if (!token) return;
+
+        try {
+            await fetch("http://localhost:5000/auth/logout", {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+        } catch (err) {
+            console.error("Logout failed:", err);
+        }
+    }
+
+    async function submitScore(finalScore, scoreLevel) {
+        if (!authToken) {
+            setScoreSubmitMessage("Log in before submitting a score.");
             return;
         }
 
@@ -625,16 +700,23 @@ export default function BlackjackGame() {
             const response = await fetch("http://localhost:5000/postScore", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${authToken}`
                 },
                 body: JSON.stringify({
-                    username,
                     score: finalScore,
                     level: scoreLevel
                 })
             });
 
             if (!response.ok) {
+                if (response.status === 401) {
+                    setAuthToken("");
+                    if (typeof window !== "undefined") {
+                        window.localStorage.removeItem("blackjackAuthToken");
+                    }
+                    setAuthMessage("Log in again before submitting scores.");
+                }
                 throw new Error("Score submission failed.");
             }
 
@@ -1072,6 +1154,12 @@ export default function BlackjackGame() {
                 betScore={bet}
                 playerName={playerName}
                 onPlayerNameChange={handlePlayerNameChange}
+                playerPin={playerPin}
+                onPlayerPinChange={setPlayerPin}
+                onLogin={handleLogin}
+                onLogout={handleLogout}
+                isAuthenticated={Boolean(authToken)}
+                authMessage={authMessage}
                 scoreSubmitMessage={scoreSubmitMessage}
                 dealButtonDisabled={clickableButtons.findIndex(a => a == "Deal") == -1}
                 addBetButtonDisabled={clickableButtons.findIndex(a => a == "Add Bet") == -1}
