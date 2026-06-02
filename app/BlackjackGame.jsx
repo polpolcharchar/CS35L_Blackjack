@@ -710,6 +710,7 @@ export default function BlackjackGame() {
             });
 
             if (!response.ok) {
+                const data = await response.json().catch(() => ({}));
                 if (response.status === 401) {
                     setAuthToken("");
                     if (typeof window !== "undefined") {
@@ -717,13 +718,13 @@ export default function BlackjackGame() {
                     }
                     setAuthMessage("Log in again before submitting scores.");
                 }
-                throw new Error("Score submission failed.");
+                throw new Error(data.error ?? "Score submission failed.");
             }
 
             setScoreSubmitMessage("Score submitted.");
         } catch (err) {
             console.error("Score submission failed:", err);
-            setScoreSubmitMessage("Could not submit score. Is the server running?");
+            setScoreSubmitMessage(err.message);
         }
     }
 

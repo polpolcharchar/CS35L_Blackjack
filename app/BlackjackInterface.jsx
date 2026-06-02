@@ -136,7 +136,7 @@ export default function BlackjackInterface({
                         <span className="statValue">{playerScore}</span>
                     </div>
                     <div className="statChip">
-                        <span className="statLabel">High Score</span>
+                        <span className="statLabel">Best Run</span>
                         <span className="statValue">{highScore}</span>
                     </div>
                 </div>
