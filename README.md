@@ -1,6 +1,6 @@
 # CS35L Blackjack
 
-A full-stack Blackjack web app for the CS35L group project. Users can play Blackjack with betting, level-based deck orders, local best-run tracking, authenticated score submission, leaderboard browsing, and server-backed score search.
+A full-stack Blackjack web app for our CS35L group project. Users can play Blackjack with betting, level-based deck orders, local best-run tracking, authenticated score submission, leaderboard browsing, and server-backed score search.
 
 ## Tech Stack
 
@@ -29,7 +29,7 @@ A full-stack Blackjack web app for the CS35L group project. Users can play Black
 Create a file named `server/.env`. Do not commit this file.
 
 For local MongoDB:
-
+https://www.mongodb.com/try/download/community
 ```env
 MONGO_URI=mongodb://127.0.0.1:27017
 MONGO_DB_NAME=blackjack
@@ -49,12 +49,9 @@ If `MONGO_URI` is missing, the backend will still start and login will work, but
 ## Install
 
 From the repository root:
-
 ```bash
-npm.cmd install
+npm install
 ```
-
-On macOS/Linux, use `npm` instead of `npm.cmd`.
 
 ## Run Locally
 
@@ -64,7 +61,7 @@ Backend:
 
 ```bash
 cd server
-npm.cmd run dev
+npm run dev
 ```
 
 Expected successful database startup:
@@ -126,7 +123,7 @@ Production build:
 npm.cmd run build
 ```
 
-Automated end-to-end tests are still TODO. The project requirement is 2+ E2E tests, so the next planned test work is to add Playwright tests for:
+Automated end-to-end tests are still TODO. The planned test work is to add Playwright tests for:
 
 - Blackjack login/play interaction.
 - Leaderboard/search data flow after score submission.
