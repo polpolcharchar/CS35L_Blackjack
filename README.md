@@ -90,7 +90,7 @@ The backend API runs on:
 http://localhost:5000
 ```
 
-## App Flow
+## App Startup
 
 1. Open `http://localhost:5173`.
 2. Enter a player name.
@@ -127,39 +127,6 @@ Automated end-to-end tests are still TODO. The planned test work is to add Playw
 
 - Blackjack login/play interaction.
 - Leaderboard/search data flow after score submission.
-
-## Architecture Diagram
-
-```mermaid
-flowchart LR
-  User[User Browser] --> Frontend[React Router Frontend<br/>localhost:5173]
-  Frontend --> API[Express API<br/>localhost:5000]
-  API --> Sessions[In-memory auth sessions]
-  API --> Mongo[(MongoDB<br/>scores collection)]
-```
-
-The browser renders the Blackjack game, leaderboard, and search pages. The frontend sends login and score requests to Express. Express keeps short-lived auth tokens in memory and stores score records in MongoDB.
-
-## Score Submission Flow
-
-```mermaid
-sequenceDiagram
-  participant U as User
-  participant F as Frontend
-  participant A as Express API
-  participant D as MongoDB
-
-  U->>F: Enter player name and PIN
-  F->>A: POST /auth/login
-  A-->>F: token and username
-  U->>F: Finish 10 hands
-  F->>A: POST /postScore with Bearer token
-  A->>A: Validate token, score, and level
-  A->>D: Save score
-  D-->>A: Saved score record
-  A-->>F: 201 Created
-  F-->>U: Score submitted
-```
 
 Scores only appear on Leaderboard and Search after MongoDB is connected and a completed 10-hand run has been submitted.
 
