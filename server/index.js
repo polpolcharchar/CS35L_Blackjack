@@ -8,6 +8,7 @@ dotenv.config();
 
 const app = express();
 const sessions = new Map();
+let isDatabaseConnected = false;
 
 app.use(cors({
   origin: "http://localhost:5173"
@@ -15,7 +16,13 @@ app.use(cors({
 app.use(express.json());
 
 const start = async () => {
-  await DatabaseModule.connectDB();
+  try {
+    await DatabaseModule.connectDB();
+    isDatabaseConnected = true;
+  } catch (err) {
+    isDatabaseConnected = false;
+    console.warn("Server started without database access. Score routes will return 503 until MongoDB is configured.");
+  }
 
   app.listen(5000, () => {
     console.log("Server running on port 5000");
@@ -37,6 +44,14 @@ const authenticate = (req, res, next) => {
   }
 
   req.user = session;
+  return next();
+};
+
+const requireDatabase = (req, res, next) => {
+  if (!isDatabaseConnected) {
+    return res.status(503).json({ error: "Database is not connected" });
+  }
+
   return next();
 };
 
@@ -68,7 +83,7 @@ app.post("/auth/logout", authenticate, (req, res) => {
   return res.json({ message: "Logged out" });
 });
 
-app.post("/postScore", authenticate, async (req, res) => {
+app.post("/postScore", authenticate, requireDatabase, async (req, res) => {
   try {
     const { score, level } = req.body;
     const { username } = req.user;
@@ -90,7 +105,7 @@ app.post("/postScore", authenticate, async (req, res) => {
   }
 });
 
-app.get("/scores/top", async (req, res) => {
+app.get("/scores/top", requireDatabase, async (req, res) => {
   try {
     const level = Number.parseInt(req.query.level ?? "0", 10);
     const limit = Number.parseInt(req.query.limit ?? "20", 10);
@@ -112,7 +127,7 @@ app.get("/scores/top", async (req, res) => {
   }
 });
 
-app.get("/scores/search", async (req, res) => {
+app.get("/scores/search", requireDatabase, async (req, res) => {
   try {
     const username = String(req.query.username ?? "").trim();
     const limit = Number.parseInt(req.query.limit ?? "20", 10);
