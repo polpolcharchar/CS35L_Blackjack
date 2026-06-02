@@ -109,29 +109,9 @@ http://localhost:5000
 - `GET /scores/top?level=0&limit=10`: returns top scores for a level.
 - `GET /scores/search?username=ryan&limit=20`: searches submitted scores by username.
 
-## Tests And Checks
-
-Typecheck:
-
-```bash
-npm.cmd run typecheck
-```
-
-Production build:
-
-```bash
-npm.cmd run build
-```
-
-Automated end-to-end tests are still TODO. The planned test work is to add Playwright tests for:
-
-- Blackjack login/play interaction.
-- Leaderboard/search data flow after score submission.
-
-Scores only appear on Leaderboard and Search after MongoDB is connected and a completed 10-hand run has been submitted.
-
 ## Notes
 
 - `server/.env` is ignored by git because it may contain secrets.
 - `server/*.log` files are ignored because they are local debugging output.
 - Sessions are stored in memory, so logging in again is required after the backend restarts.
+- Scores only appear on Leaderboard and Search after MongoDB is connected and a completed 10-hand run has been submitted.
