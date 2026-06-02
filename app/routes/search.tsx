@@ -31,9 +31,10 @@ export default function Search() {
       fetch(`http://localhost:5000/scores/search?username=${encodeURIComponent(query)}&limit=20`, {
         signal: controller.signal
       })
-        .then((res) => {
+        .then(async (res) => {
           if (!res.ok) {
-            throw new Error("Unable to search players");
+            const data = await res.json().catch(() => ({}));
+            throw new Error(data.error ?? "Unable to search players");
           }
 
           return res.json();

@@ -22,9 +22,10 @@ export default function Leaderboard() {
     fetch(`http://localhost:5000/scores/top?level=${level}&limit=10`, {
       signal: controller.signal
     })
-      .then((res) => {
+      .then(async (res) => {
         if (!res.ok) {
-          throw new Error("Unable to load leaderboard");
+          const data = await res.json().catch(() => ({}));
+          throw new Error(data.error ?? "Unable to load leaderboard");
         }
 
         return res.json();
