@@ -8,6 +8,8 @@ import {
   ScrollRestoration,
 } from "react-router";
 
+import { isLoggedIn, getCurrentUser, logout } from "./auth";
+
 import type { Route } from "./+types/root";
 import "./app.css";
 
@@ -42,6 +44,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
+const loggedIn = isLoggedIn();
+const user = getCurrentUser();
+
 export default function App() {
   return (
     <>
@@ -55,6 +60,25 @@ export default function App() {
         <NavLink to="/search">
           Search
         </NavLink>
+        {loggedIn ? (
+          <>
+            <button
+              onClick={() => {
+                logout();
+                window.location.reload();
+              }}
+              className="uiButtonSecondary"
+                        type="button"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <NavLink to="/auth/login">
+            Login
+          </NavLink>
+        )
+      }
       </nav>
       <Outlet />
     </>
