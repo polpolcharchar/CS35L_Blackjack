@@ -38,7 +38,7 @@ export default function BlackjackInterface({
                         Random
                     </button>
                     {!inLevels && (
-                        <button className="uiButtonSecondary" onClick={() => handleClick("Levels")}>
+                        <button className="uiButtonSecondary" id="levelsButton" onClick={() => handleClick("Levels")}>
                             Levels
                         </button>
                     )}
@@ -53,7 +53,7 @@ export default function BlackjackInterface({
                             <button className="uiButtonSecondary" onClick={() => handleClick("Level7")}>Level 7</button>
                             <button className="uiButtonSecondary" onClick={() => handleClick("Level8")}>Level 8</button>
                             <button className="uiButtonSecondary" onClick={() => handleClick("Level9")}>Level 9</button>
-                            <button className="uiButtonSecondary" onClick={() => handleClick("Level10")}>Level 10</button>
+                            <button className="uiButtonSecondary" id="level10Button" onClick={() => handleClick("Level10")}>Level 10</button>
                         </>
                     )}
                 </div>
@@ -124,7 +124,7 @@ export default function BlackjackInterface({
                     <button disabled={clearBetButtonDisabled} className="uiButton" onClick={() => handleClick("Clear Bet")}>Clear Bet</button>
                     <button disabled={hitButtonDisabled} className="uiButton" onClick={() => handleClick("Hit")}>Hit</button>
                     <button disabled={standButtonDisabled} className="uiButton" id="standButton" onClick={() => handleClick("Stand")}>Stand</button>
-                    <button disabled={resetButtonDisabled} className="uiButton" onClick={() => handleClick("Reset")}>Reset</button>
+                    <button disabled={resetButtonDisabled} className="uiButton" id="resetButton" onClick={() => handleClick("Reset")}>Reset</button>
                 </div>
 
                 <hr className="feltDivider" />
