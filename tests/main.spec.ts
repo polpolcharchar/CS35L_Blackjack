@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import crypto from 'crypto';
 
 test('has title', async ({ page }) => {
-  await page.goto('http://localhost:5173/');
+  await page.goto('/');
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Blackjack/);
@@ -10,7 +10,7 @@ test('has title', async ({ page }) => {
 
 
 test('deal then stand 10 times', async ({ page }) => {
-  await page.goto('http://localhost:5173/');
+  await page.goto('/');
 
   // Generate a random hex player name
   const playerName = crypto.randomBytes(4).toString('hex');
@@ -55,7 +55,7 @@ test('deal then stand 10 times', async ({ page }) => {
 });
 
 test('double score verification', async ({ page }) => {
-  await page.goto('http://localhost:5173/');
+  await page.goto('/');
 
   const playerName = crypto.randomBytes(4).toString('hex');
 
