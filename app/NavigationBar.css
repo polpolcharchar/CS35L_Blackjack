@@ -1,0 +1,49 @@
+/* NavigationBar Styles */
+
+/* Remove all ::before and ::after pseudo-elements */
+.navbar-appbar::before,
+.navbar-appbar.MuiAppBar-root::before,
+.navbar-appbar::after,
+.navbar-appbar.MuiAppBar-root::after,
+.navbar-buttons::before,
+.navbar-buttons.MuiBox-root::before,
+.navbar-button::before,
+.navbar-button.MuiButton-root::before,
+.navbar-button::after,
+.navbar-button.MuiButton-root::after,
+.navbar-login-button::before,
+.navbar-login-button.MuiButton-root::before,
+.navbar-login-button::after,
+.navbar-login-button.MuiButton-root::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Disable Material-UI ripple effect */
+.navbar-button .MuiTouchRipple-root,
+.navbar-login-button .MuiTouchRipple-root {
+  display: none !important;
+}
+
+/* Reset Material-UI AppBar defaults - no transform/position change on hover */
+.navbar-appbar,
+.navbar-appbar.MuiAppBar-root {
+  padding: 30px !important;
+  margin: 0 !important;
+  background: #00000000 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+  border: none !important;
+  border-bottom: none !important;
+  border-radius: 0 !important;
+  min-height: auto !important;
+  position: fixed !important;
+  transform: none !important;
+  top: 0 !important;
+  transition: none !important;
+}
+
+.navbar-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}

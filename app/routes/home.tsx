@@ -1,16 +1,21 @@
 import type { Route } from "./+types/home";
+import NavigationBar from "../NavigationBar.jsx";
 import BlackjackGame from "../BlackjackGame.jsx";
 
 export function meta({ }: Route.MetaArgs) {
   return [
-    { title: "CS35L Blackjack" },
-    {
-      name: "description",
-      content: "A competitive web version of Blackjack with shared levels.",
-    },
+    { title: "Blackjack" },
+    { name: "description", content: "Play Blackjack!" },
   ];
 }
 
 export default function Home() {
-  return <BlackjackGame />;
+  return (
+    <>
+      <NavigationBar />
+      <div className="gamePage">
+        <BlackjackGame />
+      </div>
+    </>
+  );
 }

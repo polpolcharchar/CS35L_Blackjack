@@ -278,3 +278,69 @@ body {
   opacity: 0.4;
   cursor: not-allowed;
 }
+
+.inputSection {
+  margin: 0 0 16px;
+}
+
+.uiInput {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(212, 175, 90, 0.35);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: #f5e6c8;
+  font-family: Georgia, ui-serif, serif;
+  font-size: 15px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.uiInput:focus {
+  border-color: #d4af5a;
+}
+
+.uiInput::placeholder {
+  color: rgba(245, 230, 200, 0.4);
+}
+
+.passwordWrapper {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.passwordWrapper .uiInput {
+  flex: 1;
+}
+
+.errorText {
+  color: #ff6b6b;
+  font-size: 12px;
+  margin: 6px 0 0 4px;
+}
+
+.authSwitch {
+  text-align: center;
+  margin: 14px 0 0;
+  font-size: 13px;
+  color: #f5e6c8;
+}
+
+.authSwitch a {
+  color: #d4af5a;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.authSwitch a:hover {
+  text-decoration: underline;
+}
+
+.gamePage {
+  padding-top: 65px;
+}
+
+.gamePage .tableLayout {
+  min-height: calc(100vh - 65px);
+}
