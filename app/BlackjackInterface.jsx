@@ -70,6 +70,7 @@ export default function BlackjackInterface({
                             onChange={(event) => onPlayerNameChange(event.target.value)}
                             maxLength={24}
                             disabled={isAuthenticated}
+                            id="playerNameInput"
                         />
                     </label>
 
@@ -82,6 +83,7 @@ export default function BlackjackInterface({
                                 value={playerPin}
                                 onChange={(event) => onPlayerPinChange(event.target.value)}
                                 maxLength={24}
+                                id="pinInput"
                             />
                         </label>
                     )}
@@ -90,6 +92,7 @@ export default function BlackjackInterface({
                         className="uiButtonSecondary"
                         type="button"
                         onClick={isAuthenticated ? onLogout : onLogin}
+                        id="logInButton"
                     >
                         {isAuthenticated ? "Log Out" : "Log In"}
                     </button>
@@ -116,11 +119,11 @@ export default function BlackjackInterface({
                 </div>
 
                 <div className="buttonRow">
-                    <button disabled={dealButtonDisabled} className="uiButton" onClick={() => handleClick("Deal")}>Deal</button>
-                    <button disabled={addBetButtonDisabled} className="uiButton" onClick={() => handleClick("Add Bet")}>Add Bet</button>
+                    <button disabled={dealButtonDisabled} className="uiButton" id="dealButton" onClick={() => handleClick("Deal")}>Deal</button>
+                    <button disabled={addBetButtonDisabled} className="uiButton" id="addBetButton" onClick={() => handleClick("Add Bet")}>Add Bet</button>
                     <button disabled={clearBetButtonDisabled} className="uiButton" onClick={() => handleClick("Clear Bet")}>Clear Bet</button>
                     <button disabled={hitButtonDisabled} className="uiButton" onClick={() => handleClick("Hit")}>Hit</button>
-                    <button disabled={standButtonDisabled} className="uiButton" onClick={() => handleClick("Stand")}>Stand</button>
+                    <button disabled={standButtonDisabled} className="uiButton" id="standButton" onClick={() => handleClick("Stand")}>Stand</button>
                     <button disabled={resetButtonDisabled} className="uiButton" onClick={() => handleClick("Reset")}>Reset</button>
                 </div>
 

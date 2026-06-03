@@ -1012,7 +1012,7 @@ export default function BlackjackGame() {
 
             setTimeout(() => {
                 checkGameState("Stand", dealerCardsLocal);
-            }, 1000);
+            }, 100);
         }
     }
 

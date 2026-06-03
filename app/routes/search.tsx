@@ -76,6 +76,7 @@ export default function Search() {
           value={search}
           onChange={(event) => setSearch(event.target.value)}
           className="rounded border border-green-700 bg-green-900 px-4 py-2 text-white placeholder-green-400"
+          id="playerSearchInput"
         />
 
         <div className="flex flex-col gap-3">

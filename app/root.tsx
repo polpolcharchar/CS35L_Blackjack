@@ -57,7 +57,7 @@ export default function App() {
         <NavLink to="/leaderboard">
           Leaderboard
         </NavLink>
-        <NavLink to="/search">
+        <NavLink to="/search" id="searchLink">
           Search
         </NavLink>
         {loggedIn ? (
