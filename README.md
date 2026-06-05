@@ -121,78 +121,40 @@ http://localhost:5000
 ### System Architecture
 
 ```text
-Browser
-  |
-  v
-React Router frontend
-  |
-  +-- Home page
-  |     |
-  |     v
-  |   BlackjackGame.jsx
-  |     |
-  |     v
-  |   BlackjackInterface.jsx
-  |     |
-  |     v
-  |   PlayingCardHand.jsx / PlayingCard.jsx
-  |
-  +-- Leaderboard page
-  |
-  +-- Search page
+User in browser
+   -> React frontend
+        -> Home route
+             -> BlackjackGame.jsx
+             -> BlackjackInterface.jsx
+             -> card components
 
-Frontend API requests
-  |
-  v
-Express server: server/index.js
-  |
-  +-- In-memory login sessions
-  |
-  v
-Database module: server/db.js
-  |
-  v
-MongoDB scores collection
+        -> Leaderboard route
+        -> Search route
+
+API calls from the frontend
+   -> Express backend (server/index.js)
+        -> login/logout sessions
+        -> Mongo helper functions (server/db.js)
+             -> MongoDB saved scores
 ```
 
 ### Blackjack Game Flow
 
 ```text
-Log in
-  |
-  v
-Choose Random mode or Level 1-10
-  |
-  v
-Place or clear bet
-  |
-  v
-Deal cards
-  |
-  v
-Player turn
-  |
-  +-- Hit
-  |     |
-  |     +-- Safe total --> Player turn
-  |     |
-  |     +-- Bust -------> Round over
-  |
-  +-- Stand
-        |
-        v
-Dealer turn
-        |
-        v
-Round over
-        |
-        v
-Update score and hands played
-        |
-        +-- Fewer than 10 hands --> Deal next hand
-        |
-        +-- 10 hands completed --> Submit score to backend
-                                      |
-                                      v
-                                    Reset to play again
+Player logs in
+   -> pick Random or a level
+   -> set bet
+   -> deal cards
+   -> player turn
+        -> Hit
+             -> keep playing if still at 21 or under
+             -> hand ends if player busts
+
+        -> Stand
+             -> dealer draws and compares hands
+
+Round ends
+   -> update score, bet, and hands played
+   -> less than 10 hands: play another hand
+   -> 10 hands done: submit score and reset
 ```
