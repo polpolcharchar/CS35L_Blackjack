@@ -118,43 +118,11 @@ http://localhost:5000
 
 ## Architecture Diagrams
 
-### System Architecture
+### Diagram 1
+#### Sequence diagram for score submission
+<img width="675" height="490" alt="sequence diagram" src="https://github.com/user-attachments/assets/4a26d71a-1417-4844-b5c7-fa81b0c0fda0" />
 
-```text
-User in browser
-   -> React frontend
-        -> Home route
-             -> BlackjackGame.jsx
-             -> BlackjackInterface.jsx
-             -> card components
 
-        -> Leaderboard route
-        -> Search route
-
-API calls from the frontend
-   -> Express backend (server/index.js)
-        -> login/logout sessions
-        -> Mongo helper functions (server/db.js)
-             -> MongoDB saved scores
-```
-
-### Blackjack Game Flow
-
-```text
-Player logs in
-   -> pick Random or a level
-   -> set bet
-   -> deal cards
-   -> player turn
-        -> Hit
-             -> keep playing if still at 21 or under
-             -> hand ends if player busts
-
-        -> Stand
-             -> dealer draws and compares hands
-
-Round ends
-   -> update score, bet, and hands played
-   -> less than 10 hands: play another hand
-   -> 10 hands done: submit score and reset
-```
+### Diagram 2
+#### Game Loop
+<img width="686" height="821" alt="Game loop" src="https://github.com/user-attachments/assets/128c0520-4850-47a6-b81d-4a190f684911" />
