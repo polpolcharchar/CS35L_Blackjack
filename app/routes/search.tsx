@@ -60,7 +60,6 @@ export default function Search() {
     };
   }, [search]);
 
- // UPDATED: changed to match main game theme
   return (
     <div className="tableLayout">
       <div className="uiCard">
@@ -68,7 +67,6 @@ export default function Search() {
 
         <hr className="feltDivider" />
 
-        {/* Search input */}
         <div className="inputSection">
           <span className="sectionLabel">Username</span>
           <input
@@ -102,7 +100,6 @@ export default function Search() {
             <p className="statChip">No submitted scores match that username.</p>
           )}
 
-          {/* Render each search result */}
           {!isLoading && !errorMessage && scores.map((player) => (
             <div key={player._id} className="statChip" style={{ flexDirection: "row", justifyContent: "space-between" }}>
               <div>

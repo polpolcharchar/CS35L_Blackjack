@@ -13,9 +13,8 @@ export default function Leaderboard() {
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
 
-  // Fetch top 10 scores from server whenever level changes
   useEffect(() => {
-    const controller = new AbortController(); // cancels fetch if level changes mid-request
+    const controller = new AbortController();
 
     setIsLoading(true);
     setErrorMessage("");
@@ -44,11 +43,9 @@ export default function Leaderboard() {
         }
       });
 
-    // Cancel fetch if user switches level before it finishes
     return () => controller.abort();
   }, [level]);
 
-// UPDATED: changed to match main game theme
   return (
     <div className="tableLayout">
       <div className="uiCard">
@@ -56,7 +53,6 @@ export default function Leaderboard() {
 
         <hr className="feltDivider" />
 
-        {/* Level selector dropdown */}
         <div className="inputSection">
           <span className="sectionLabel">Level</span>
           <select
@@ -92,7 +88,6 @@ export default function Leaderboard() {
             <p className="statChip">No scores submitted for this level yet.</p>
           )}
 
-          {/* Render each player row */}
           {!isLoading && !errorMessage && scores.map((player, index) => (
             <div key={player._id} className="statChip" style={{ flexDirection: "row", justifyContent: "space-between" }}>
               <p className="statLabel">
