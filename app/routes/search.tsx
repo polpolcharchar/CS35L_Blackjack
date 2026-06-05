@@ -60,36 +60,36 @@ export default function Search() {
     };
   }, [search]);
 
+ // UPDATED: changed to match main game theme
   return (
-    <main className="min-h-screen bg-green-950 text-white">
-      <section className="mx-auto flex max-w-3xl flex-col gap-6 px-6 py-16">
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-green-200">
-            CS35L Team Project
-          </p>
-          <h1 className="mt-3 text-4xl font-bold">Search Players</h1>
+    <div className="tableLayout">
+      <div className="uiCard">
+        <div className="tableTitle">Search Players</div>
+
+        <hr className="feltDivider" />
+
+        {/* Search input */}
+        <div className="inputSection">
+          <span className="sectionLabel">Username</span>
+          <input
+            type="text"
+            placeholder="Enter username to search..."
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+            className="uiInput"
+            id="playerSearchInput"
+          />
         </div>
 
-        <input
-          type="text"
-          placeholder="Enter username here to search."
-          value={search}
-          onChange={(event) => setSearch(event.target.value)}
-          className="rounded border border-green-700 bg-green-900 px-4 py-2 text-white placeholder-green-400"
-          id="playerSearchInput"
-        />
+        <hr className="feltDivider" />
 
         <div className="flex flex-col gap-3">
           {search.trim().length === 0 && (
-            <p className="rounded border border-green-700 bg-green-900 p-3 text-green-100">
-              Enter a username to search submitted scores.
-            </p>
+            <p className="statChip">Enter a username to search submitted scores.</p>
           )}
 
           {isLoading && (
-            <p className="rounded border border-green-700 bg-green-900 p-3 text-green-100">
-              Searching players...
-            </p>
+            <p className="statChip">Searching players...</p>
           )}
 
           {!isLoading && errorMessage && (
@@ -99,27 +99,23 @@ export default function Search() {
           )}
 
           {!isLoading && !errorMessage && search.trim().length > 0 && scores.length === 0 && (
-            <p className="rounded border border-green-700 bg-green-900 p-3 text-green-100">
-              No submitted scores match that username.
-            </p>
+            <p className="statChip">No submitted scores match that username.</p>
           )}
 
+          {/* Render each search result */}
           {!isLoading && !errorMessage && scores.map((player) => (
-            <div
-              key={player._id}
-              className="flex items-center justify-between rounded border border-green-700 bg-green-900 p-3"
-            >
+            <div key={player._id} className="statChip" style={{ flexDirection: "row", justifyContent: "space-between" }}>
               <div>
-                <p className="font-semibold text-green-200">{player.username}</p>
-                <p className="text-sm text-green-100">
+                <p className="statLabel">{player.username}</p>
+                <p className="statValue" style={{ fontSize: "12px" }}>
                   {player.level === 0 ? "Random" : `Level ${player.level}`}
                 </p>
               </div>
-              <p className="font-semibold text-green-100">${player.score}</p>
+              <p className="statValue">${player.score}</p>
             </div>
           ))}
         </div>
-      </section>
-    </main>
+      </div>
+    </div>
   );
 }

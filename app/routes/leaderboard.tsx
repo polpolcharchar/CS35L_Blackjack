@@ -9,12 +9,13 @@ type ScoreRecord = {
 
 export default function Leaderboard() {
   const [scores, setScores] = useState<ScoreRecord[]>([]);
-  const [level, setLevel] = useState(0);
+  const [level, setLevel] = useState(0); // 0 = Random
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
 
+  // Fetch top 10 scores from server whenever level changes
   useEffect(() => {
-    const controller = new AbortController();
+    const controller = new AbortController(); // cancels fetch if level changes mid-request
 
     setIsLoading(true);
     setErrorMessage("");
@@ -27,7 +28,6 @@ export default function Leaderboard() {
           const data = await res.json().catch(() => ({}));
           throw new Error(data.error ?? "Unable to load leaderboard");
         }
-
         return res.json();
       })
       .then((data) => {
@@ -44,23 +44,23 @@ export default function Leaderboard() {
         }
       });
 
+    // Cancel fetch if user switches level before it finishes
     return () => controller.abort();
   }, [level]);
 
+// UPDATED: changed to match main game theme
   return (
-    <main className="min-h-screen bg-green-950 text-white">
-      <section className="mx-auto flex max-w-3xl flex-col gap-6 px-6 py-16">
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-green-200">
-            CS35L Team Project
-          </p>
-          <h1 className="mt-3 text-4xl font-bold">Leaderboard</h1>
-        </div>
+    <div className="tableLayout">
+      <div className="uiCard">
+        <div className="tableTitle">Leaderboard</div>
 
-        <label className="flex w-fit flex-col gap-2 text-sm font-semibold text-green-100">
-          Level
+        <hr className="feltDivider" />
+
+        {/* Level selector dropdown */}
+        <div className="inputSection">
+          <span className="sectionLabel">Level</span>
           <select
-            className="rounded border border-green-700 bg-green-900 px-3 py-2 text-white"
+            className="uiInput"
             value={level}
             onChange={(event) => setLevel(Number(event.target.value))}
           >
@@ -71,44 +71,39 @@ export default function Leaderboard() {
               </option>
             ))}
           </select>
-        </label>
-
-        <div>
-          <p className="text-lg text-green-100">Top 10 Players</p>
-          <div className="mt-2 flex flex-col gap-3">
-            {isLoading && (
-              <p className="rounded border border-green-700 bg-green-900 p-3 text-green-100">
-                Loading scores...
-              </p>
-            )}
-
-            {!isLoading && errorMessage && (
-              <p className="rounded border border-red-400 bg-red-950 p-3 text-red-100">
-                {errorMessage}
-              </p>
-            )}
-
-            {!isLoading && !errorMessage && scores.length === 0 && (
-              <p className="rounded border border-green-700 bg-green-900 p-3 text-green-100">
-                No scores have been submitted for this level yet.
-              </p>
-            )}
-
-            {!isLoading && !errorMessage && scores.map((player, index) => (
-              <div
-                key={player._id}
-                className="flex items-center justify-between rounded border border-green-700 bg-green-900 p-3"
-              >
-                <p className="font-semibold text-green-200">
-                  <span className="inline-block w-12">#{index + 1}</span>
-                  {player.username}
-                </p>
-                <p className="text-green-100">${player.score}</p>
-              </div>
-            ))}
-          </div>
         </div>
-      </section>
-    </main>
+
+        <hr className="feltDivider" />
+
+        <p className="sectionLabel">Top 10 Players</p>
+
+        <div className="flex flex-col gap-3 mt-2">
+          {isLoading && (
+            <p className="statChip">Loading scores...</p>
+          )}
+
+          {!isLoading && errorMessage && (
+            <p className="rounded border border-red-400 bg-red-950 p-3 text-red-100">
+              {errorMessage}
+            </p>
+          )}
+
+          {!isLoading && !errorMessage && scores.length === 0 && (
+            <p className="statChip">No scores submitted for this level yet.</p>
+          )}
+
+          {/* Render each player row */}
+          {!isLoading && !errorMessage && scores.map((player, index) => (
+            <div key={player._id} className="statChip" style={{ flexDirection: "row", justifyContent: "space-between" }}>
+              <p className="statLabel">
+                <span className="inline-block w-12">#{index + 1}</span>
+                {player.username}
+              </p>
+              <p className="statValue">${player.score}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
