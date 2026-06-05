@@ -743,10 +743,10 @@ export default function BlackjackGame() {
             checkGameState("Deal", nextDealerCards, nextPlayerCards);
         }
         else if (type == "Add Bet"){
-            if (score >= 50)
+            if (score >= 20)
             {
-                setBet(prev => prev + 50);
-                setScore(prev => prev - 50);
+                setBet(prev => prev + 20);
+                setScore(prev => prev - 20);
             }
         }
         else if (type == "Clear Bet"){
