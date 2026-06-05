@@ -115,3 +115,71 @@ http://localhost:5000
 - `server/*.log` files are ignored because they are local debugging output.
 - Sessions are stored in memory, so logging in again is required after the backend restarts.
 - Scores only appear on Leaderboard and Search after MongoDB is connected and a completed 10-hand run has been submitted.
+
+## Architecture Diagrams
+
+### System Architecture
+
+This diagram shows the main frontend, backend, and database pieces. The React Router app renders the game, leaderboard, and search pages. The Blackjack game page owns the card, betting, score, authentication, and level state, while `BlackjackInterface.jsx` renders the controls and card areas. Backend requests go to the Express server, which stores login sessions in memory and persists submitted scores in MongoDB through the database module.
+
+```mermaid
+flowchart LR
+  Browser[Browser]
+
+  subgraph Frontend[React Router Frontend]
+    Routes[app/routes.ts]
+    Home[Home Route]
+    BlackjackGame[BlackjackGame.jsx]
+    BlackjackInterface[BlackjackInterface.jsx]
+    PlayingCards[PlayingCardHand.jsx and PlayingCard.jsx]
+    Leaderboard[Leaderboard Route]
+    Search[Search Route]
+  end
+
+  subgraph Backend[Express Backend]
+    Server[server/index.js]
+    Sessions[In-memory sessions]
+    DatabaseModule[server/db.js]
+  end
+
+  MongoDB[(MongoDB Scores Collection)]
+
+  Browser --> Routes
+  Routes --> Home
+  Routes --> Leaderboard
+  Routes --> Search
+  Home --> BlackjackGame
+  BlackjackGame --> BlackjackInterface
+  BlackjackInterface --> PlayingCards
+
+  BlackjackGame -->|POST /auth/login, /auth/logout, /postScore| Server
+  Leaderboard -->|GET /scores/top| Server
+  Search -->|GET /scores/search| Server
+
+  Server --> Sessions
+  Server --> DatabaseModule
+  DatabaseModule --> MongoDB
+```
+
+### Blackjack Game Flow
+
+This diagram shows the main state transitions for one run of the game. A player logs in, selects Random mode or a fixed level deck, places a bet, deals, and then chooses Hit or Stand. `BlackjackGame.jsx` evaluates the hand, updates score and best-run state, and submits the score after 10 hands.
+
+```mermaid
+stateDiagram-v2
+  [*] --> Login
+  Login --> SelectMode: successful login
+  SelectMode --> ReadyToDeal: Random or Level 1-10 selected
+  ReadyToDeal --> ReadyToDeal: Add Bet or Clear Bet
+  ReadyToDeal --> PlayerTurn: Deal
+  PlayerTurn --> PlayerTurn: Hit and player total <= 21
+  PlayerTurn --> RoundOver: Hit and player busts
+  PlayerTurn --> DealerTurn: Stand
+  DealerTurn --> DealerTurn: dealer draws below 17
+  DealerTurn --> RoundOver: dealer stands, busts, wins, loses, or draws
+  RoundOver --> ReadyToDeal: fewer than 10 hands played
+  RoundOver --> SubmitScore: 10 hands completed
+  SubmitScore --> RunFinished: POST /postScore
+  RunFinished --> ReadyToDeal: Reset
+  ReadyToDeal --> SelectMode: Random or Levels button
+```
