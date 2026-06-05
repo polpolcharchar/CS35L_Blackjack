@@ -1047,9 +1047,9 @@ export default function BlackjackGame() {
         }
         else if (tScore == 100)
         {
-            if (bet == 0)
+            if (bet == 0 && score == 0)
             {
-                bet = 25;
+                bet = 50;
             }
             nextScore = score + bet * 2;
             setScore(nextScore);
@@ -1057,9 +1057,9 @@ export default function BlackjackGame() {
         }
         else if (tScore == 150)
         {
-            if (bet == 0)
+            if (bet == 0 && score == 0)
             {
-                bet = 25;
+                bet = 50;
             }
             nextScore = score + bet * 2.5;
             setScore(nextScore);
