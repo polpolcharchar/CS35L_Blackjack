@@ -973,7 +973,7 @@ export default function BlackjackGame() {
         const playerTotal = getHandValue(playerHand)
         let dealerCardsLocal = dealerHand.slice();
         let dealerTotal = getHandValue(dealerCardsLocal);
-        if (playerTotal === 21 && playerHand.length === 2 && dealerTotal !== 21 && caller == "Deal") {
+        if (playerTotal === 21 && playerHand.length === 2 && dealerTotal !== 21) {
             setHandWinner("Player");
             endRound(150);
         }
