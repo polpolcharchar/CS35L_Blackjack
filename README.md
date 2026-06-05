@@ -115,3 +115,46 @@ http://localhost:5000
 - `server/*.log` files are ignored because they are local debugging output.
 - Sessions are stored in memory, so logging in again is required after the backend restarts.
 - Scores only appear on Leaderboard and Search after MongoDB is connected and a completed 10-hand run has been submitted.
+
+## Architecture Diagrams
+
+### System Architecture
+
+```text
+User in browser
+   -> React frontend
+        -> Home route
+             -> BlackjackGame.jsx
+             -> BlackjackInterface.jsx
+             -> card components
+
+        -> Leaderboard route
+        -> Search route
+
+API calls from the frontend
+   -> Express backend (server/index.js)
+        -> login/logout sessions
+        -> Mongo helper functions (server/db.js)
+             -> MongoDB saved scores
+```
+
+### Blackjack Game Flow
+
+```text
+Player logs in
+   -> pick Random or a level
+   -> set bet
+   -> deal cards
+   -> player turn
+        -> Hit
+             -> keep playing if still at 21 or under
+             -> hand ends if player busts
+
+        -> Stand
+             -> dealer draws and compares hands
+
+Round ends
+   -> update score, bet, and hands played
+   -> less than 10 hands: play another hand
+   -> 10 hands done: submit score and reset
+```
