@@ -120,7 +120,7 @@ http://localhost:5000
 
 ### Diagram 1
 #### Sequence diagram for score submission
-<img width="675" height="490" alt="sequence diagram" src="https://github.com/user-attachments/assets/4a26d71a-1417-4844-b5c7-fa81b0c0fda0" />
+<img width="675" height="490" alt="sequence diagram" src="https://github.com/user-attachments/assets/4e7b0038-8fb4-455e-babe-27bf22d64b2d" />
 
 
 ### Diagram 2
